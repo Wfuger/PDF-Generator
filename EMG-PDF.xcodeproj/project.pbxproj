@@ -12,6 +12,7 @@
 		762886081D22FBA9002A8DF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 762886061D22FBA9002A8DF1 /* Main.storyboard */; };
 		7628860A1D22FBA9002A8DF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 762886091D22FBA9002A8DF1 /* Assets.xcassets */; };
 		7628860D1D22FBA9002A8DF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7628860B1D22FBA9002A8DF1 /* LaunchScreen.storyboard */; };
+		762886151D244893002A8DF1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762886141D244893002A8DF1 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		762886091D22FBA9002A8DF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7628860C1D22FBA9002A8DF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7628860E1D22FBA9002A8DF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		762886141D244893002A8DF1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,55 @@
 		762886011D22FBA9002A8DF1 /* EMG-PDF */ = {
 			isa = PBXGroup;
 			children = (
-				762886021D22FBA9002A8DF1 /* AppDelegate.swift */,
-				762886041D22FBA9002A8DF1 /* ViewController.swift */,
-				762886061D22FBA9002A8DF1 /* Main.storyboard */,
-				762886091D22FBA9002A8DF1 /* Assets.xcassets */,
-				7628860B1D22FBA9002A8DF1 /* LaunchScreen.storyboard */,
-				7628860E1D22FBA9002A8DF1 /* Info.plist */,
+				7628861A1D2448E7002A8DF1 /* Obj-C */,
+				762886191D2448BE002A8DF1 /* Supporting_Files */,
+				762886161D244899002A8DF1 /* Model */,
+				762886181D2448AB002A8DF1 /* Controller */,
+				762886171D2448A4002A8DF1 /* View */,
 			);
 			path = "EMG-PDF";
+			sourceTree = "<group>";
+		};
+		762886161D244899002A8DF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		762886171D2448A4002A8DF1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				762886061D22FBA9002A8DF1 /* Main.storyboard */,
+				7628860B1D22FBA9002A8DF1 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		762886181D2448AB002A8DF1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				762886041D22FBA9002A8DF1 /* ViewController.swift */,
+				762886141D244893002A8DF1 /* LoginViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		762886191D2448BE002A8DF1 /* Supporting_Files */ = {
+			isa = PBXGroup;
+			children = (
+				762886021D22FBA9002A8DF1 /* AppDelegate.swift */,
+				762886091D22FBA9002A8DF1 /* Assets.xcassets */,
+				7628860E1D22FBA9002A8DF1 /* Info.plist */,
+			);
+			name = Supporting_Files;
+			sourceTree = "<group>";
+		};
+		7628861A1D2448E7002A8DF1 /* Obj-C */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Obj-C";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +139,7 @@
 				TargetAttributes = {
 					762885FE1D22FBA9002A8DF1 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = RZNB6LJ2Q6;
 					};
 				};
 			};
@@ -135,6 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				762886151D244893002A8DF1 /* LoginViewController.swift in Sources */,
 				762886051D22FBA9002A8DF1 /* ViewController.swift in Sources */,
 				762886031D22FBA9002A8DF1 /* AppDelegate.swift in Sources */,
 			);
@@ -251,9 +296,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "EMG-PDF/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.boogiesquad.EMG-PDF";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wfuger.EMG-PDF";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -262,9 +308,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "EMG-PDF/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.boogiesquad.EMG-PDF";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wfuger.EMG-PDF";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
