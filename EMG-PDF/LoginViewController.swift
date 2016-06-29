@@ -10,16 +10,31 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var emailTextField: UITextField!
+    
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBAction func loginAction(sender: UIButton) {
+        
+        if (checkLogin(self.emailTextField.text!, password: self.passwordTextField.text!)) {
+            self.performSegueWithIdentifier("dismissLogin", sender: self)
+        }
+        
+    }
+    let emailKey = "batman@ex.com"
+    let passwordKey = "nananana"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    
-        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func checkLogin(email:String, password:String) -> Bool {
+        if ((email == emailKey) && (password == passwordKey)){
+            return true
+        } else {
+            return false
+        }
     }
     
 

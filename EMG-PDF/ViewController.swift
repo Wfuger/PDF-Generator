@@ -16,6 +16,60 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var projectNamePicker: UIPickerView!
     
     var pickerData = [String]()
+    
+    var isAuthenticated = false
+    
+    var didReturnFromBackground = false
+     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    @IBAction func unwindSegue(segue: UIStoryboardSegue) {
+        
+        isAuthenticated = true
+        view.alpha = 1.0
+    }
+    
+    func appWillResignActive(notification : NSNotification) {
+        
+        view.alpha = 0
+        isAuthenticated = false
+        didReturnFromBackground = true
+    }
+    
+    func appDidBecomeActive(notification : NSNotification) {
+        
+        if didReturnFromBackground {
+            self.showLoginView()
+        }
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(false)
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
+        view.alpha = 0
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appWillResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appDidBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        self.showLoginView()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    func showLoginView() {
+        
+        if !isAuthenticated {
+            
+            self.performSegueWithIdentifier("loginView", sender: self)
+        }
+    }
 
 
     override func viewDidLoad() {
