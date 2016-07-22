@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var storeNumTextField: UITextField!
     
     @IBOutlet weak var storeNameTextField: UITextField!
@@ -17,7 +17,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     var pickerData = [String]()
     
-    var isAuthenticated = false
+    var isAuthenticated = true
     
     var didReturnFromBackground = false
      
@@ -31,45 +31,44 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         view.alpha = 1.0
     }
     
-    func appWillResignActive(notification : NSNotification) {
-        
-        view.alpha = 0
-        isAuthenticated = false
-        didReturnFromBackground = true
-    }
+//    func appWillResignActive(notification : NSNotification) {
+//        
+//        view.alpha = 0
+//        isAuthenticated = false
+//        didReturnFromBackground = true
+//    }
     
     func appDidBecomeActive(notification : NSNotification) {
         
-        if didReturnFromBackground {
-            self.showLoginView()
-        }
+//        if didReturnFromBackground {
+//            self.showLoginView()
+//        }
     }
     
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(false)
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
-        view.alpha = 0
+//        view.alpha = 0
         
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appWillResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appDidBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
-        self.showLoginView()
+//        
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appWillResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
+//        
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appDidBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+//        self.showLoginView()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func showLoginView() {
-        
-        if !isAuthenticated {
-            
-            self.performSegueWithIdentifier("loginView", sender: self)
-        }
-    }
+//    func showLoginView() {
+//        
+//        if !isAuthenticated {
+//            
+//            self.performSegueWithIdentifier("loginView", sender: self)
+//        }
+//    }
 
 
     override func viewDidLoad() {
@@ -79,9 +78,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         self.projectNamePicker.dataSource = self
         self.projectNamePicker.delegate = self
+        self.storeNumTextField.delegate = self
+        self.storeNameTextField.delegate = self
         
         pickerData = ["90% Walk", "Pre-bid Walk", "Pre-Con Walk", "Weekly Visit", "Punch Walk"]
         
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
     // The number of columns of data

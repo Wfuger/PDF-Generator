@@ -28,6 +28,10 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
     }
+    
+    @IBAction override func unwindForSegue(unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+        
+    }
 
     func checkLogin(email:String, password:String) -> Bool {
         if ((email == emailKey) && (password == passwordKey)){
