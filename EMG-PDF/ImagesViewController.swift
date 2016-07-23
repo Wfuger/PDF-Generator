@@ -7,49 +7,71 @@
 //
 
 import UIKit
-import DKImagePickerController
 import SSZipArchive
 
-class ImagesViewController: UIViewController {
+
+class ImagesViewController: UIViewController,
+                            UIImagePickerControllerDelegate,
+                            UINavigationControllerDelegate,
+                            CustomOverlayDelegate {
     
-    var photos: [AnyObject] = []
+    var isTakingPhotos = false
+    var imagePicker = UIImagePickerController()
+    var counter = 0
     
-    @IBAction func getImages(sender: AnyObject) {
-        
-        let pickerController = DKImagePickerController()
-        pickerController.assetType = .AllPhotos
-        
-        pickerController.didSelectAssets = { (assets: [DKAsset]) in
-            print("didSelectAssets")
-            
-            
-            print(assets)
-            let assetMirror = Mirror(reflecting: assets)
-            print(assetMirror.subjectType)
-            self.photos = assets
-            
+    @IBAction func getImages(
+        sender: AnyObject)
+    {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            imagePicker = UIImagePickerController()
+            isTakingPhotos = true
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+            imagePicker.allowsEditing = false
+            imagePicker.cameraCaptureMode = .Photo
+            imagePicker.showsCameraControls = false
+            let customViewController = CustomOverlayController(
+                nibName: "CustomOverlayController",
+                bundle: nil
+            )
+            let customView: CustomOverlayView = customViewController.view as! CustomOverlayView
+            customView.frame = imagePicker.view.frame
+            customView.delegate = self
+            imagePicker.modalPresentationStyle = .FullScreen
+            self.presentViewController(imagePicker, animated: true, completion: {
+                    self.imagePicker.cameraOverlayView = customView
+                })
+        } else {
+            let alertVC = UIAlertController(
+                title: "No Camera",
+                message: "Sorry, this device has no camera",
+                preferredStyle: .Alert)
+            let okAction = UIAlertAction(
+                title: "OK",
+                style:.Default,
+                handler: nil)
+            alertVC.addAction(okAction)
+            presentViewController(
+                alertVC,
+                animated: true,
+                completion: nil)
         }
-        
-        self.presentViewController(pickerController, animated: true) {}
         
     }
     @IBAction func zipButton(sender: AnyObject) {
-        
-//        let sampleDataPath = NSBundle.mainBundle().bundleURL.URLByAppendingPathComponent("Sample Data").path
-//        let zipPath = tempZipPath()
-        
-        
-        
-//        let success = SSZipArchive.createZipFileAtPath(zipPath, withFilesAtPaths: photos)
-//        if success {
-//            print(success)
-//        }
+        let zipPath = tempZipPath()
+        let photoPath = getDocumentsDirectory()
+        let success = SSZipArchive.createZipFileAtPath(zipPath, withContentsOfDirectory: photoPath as String)
+        if success {
+            print(success)
+        }
         
     }
     
     func tempZipPath() -> String {
         var path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
         path += "/\(NSUUID().UUIDString).zip"
+        print("Zip Path \(path)")
         return path
     }
     
@@ -61,10 +83,50 @@ class ImagesViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
+        print("SHIT")
     }
     
-
+    func done(overlayView: CustomOverlayView) {
+        print("done")
+        self.imagePicker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    func cancel(overlayView: CustomOverlayView) {
+        print("cancelled")
+        self.imagePicker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    func takePic(overlayView: CustomOverlayView) {
+        imagePicker.takePicture()
+    }
+    func getDocumentsDirectory() -> NSString {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    func imagePickerController(
+        picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        counter += 1
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
+        if let compressedData = UIImageJPEGRepresentation(chosenImage, 0.6)
+        {
+            let filename = getDocumentsDirectory().stringByAppendingPathComponent("\(counter)copy.jpg")
+            print(filename)
+            compressedData.writeToFile(filename, atomically: true)
+            let compressedImage = UIImage(data: compressedData)
+            UIImageWriteToSavedPhotosAlbum(compressedImage!, self,nil, nil)
+        }
+        print("Success")
+    }
+    
+    //What to do if the image picker cancels.
+    func imagePickerControllerDidCancel(
+        picker: UIImagePickerController)
+    {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

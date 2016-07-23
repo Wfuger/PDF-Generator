@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomOverlayController" customModule="EMG_PDF" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="CustomOverlayView" customModule="EMG_PDF" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVa-c5-cNq">
+                    <rect key="frame" x="263" y="511" width="75" height="73"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="73" id="Q2s-oU-eId"/>
+                        <constraint firstAttribute="width" constant="75" id="ioI-FB-Lnk"/>
+                    </constraints>
+                    <state key="normal" image="camera-button"/>
+                    <connections>
+                        <action selector="takePic:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="264-Lh-Ws2"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Jt-Cv-626">
+                    <rect key="frame" x="346" y="511" width="246" height="73"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="73" id="qCm-wh-vuO"/>
+                    </constraints>
+                    <state key="normal" title="Done"/>
+                    <connections>
+                        <action selector="done:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="7XN-iZ-pmy"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6w5-SV-anw">
+                    <rect key="frame" x="9" y="511" width="246" height="73"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="73" id="Oql-C9-6ny"/>
+                    </constraints>
+                    <state key="normal" title="Cancel"/>
+                    <connections>
+                        <action selector="cancel:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="X1c-TT-UTo"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="BVa-c5-cNq" firstAttribute="leading" secondItem="6w5-SV-anw" secondAttribute="trailing" constant="8" id="1uU-vb-byK"/>
+                <constraint firstAttribute="bottom" secondItem="6w5-SV-anw" secondAttribute="bottom" constant="16" id="A5A-Xn-jvi"/>
+                <constraint firstItem="3Jt-Cv-626" firstAttribute="leading" secondItem="BVa-c5-cNq" secondAttribute="trailing" constant="8" id="Dgd-uf-fta"/>
+                <constraint firstAttribute="trailing" secondItem="3Jt-Cv-626" secondAttribute="trailing" constant="8" id="Y4q-Hz-DgM"/>
+                <constraint firstAttribute="bottom" secondItem="BVa-c5-cNq" secondAttribute="bottom" constant="16" id="YXl-BJ-icL"/>
+                <constraint firstAttribute="bottom" secondItem="3Jt-Cv-626" secondAttribute="bottom" constant="16" id="eIE-cm-jLA"/>
+                <constraint firstItem="6w5-SV-anw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="9" id="feM-oR-9wa"/>
+                <constraint firstItem="BVa-c5-cNq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hwp-fU-nKZ"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="camera-button" width="170" height="170"/>
+    </resources>
+</document>

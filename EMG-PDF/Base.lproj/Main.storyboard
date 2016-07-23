@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GyD-La-gZi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oP9-5i-btx">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -51,32 +51,32 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iby-Mv-6fG">
-                                <rect key="frame" x="234" y="357" width="133" height="54"/>
-                                <color key="backgroundColor" red="0.11764705882352941" green="0.36470588235294116" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Maa-gu-sR9">
+                                <rect key="frame" x="185" y="407" width="230" height="53"/>
+                                <color key="backgroundColor" red="0.1205583068264158" green="0.50252754630262897" blue="0.86856971153846152" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="I1X-57-FxI"/>
-                                    <constraint firstAttribute="width" constant="133" id="fgd-tN-ehk"/>
+                                    <constraint firstAttribute="height" constant="53" id="EQG-Bn-HcJ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="25"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Login" backgroundImage="Button"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <action selector="loginAction:" destination="PbO-2D-PTa" eventType="touchUpInside" id="00M-Tj-KRA"/>
+                                    <action selector="login:" destination="PbO-2D-PTa" eventType="touchUpInside" id="t02-We-tgx"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Maa-gu-sR9" firstAttribute="leading" secondItem="INj-v4-L8c" secondAttribute="leading" id="4NI-s1-QP2"/>
                             <constraint firstItem="INj-v4-L8c" firstAttribute="top" secondItem="aNY-0j-b2l" secondAttribute="bottom" constant="8" symbolic="YES" id="9K5-m2-dgg"/>
-                            <constraint firstItem="INj-v4-L8c" firstAttribute="centerX" secondItem="iby-Mv-6fG" secondAttribute="centerX" id="AFP-px-Nfa"/>
                             <constraint firstItem="Lfq-eh-czJ" firstAttribute="trailing" secondItem="INj-v4-L8c" secondAttribute="trailing" id="COi-vO-ksL"/>
                             <constraint firstItem="Lfq-eh-czJ" firstAttribute="top" secondItem="UQu-HV-Mac" secondAttribute="bottom" constant="8" symbolic="YES" id="Emy-Ck-sVP"/>
-                            <constraint firstItem="eeT-JH-qK3" firstAttribute="top" secondItem="iby-Mv-6fG" secondAttribute="bottom" constant="189" id="IWp-lh-DQv"/>
                             <constraint firstItem="aNY-0j-b2l" firstAttribute="top" secondItem="Lfq-eh-czJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Sht-Mw-drB"/>
-                            <constraint firstItem="iby-Mv-6fG" firstAttribute="top" secondItem="INj-v4-L8c" secondAttribute="bottom" constant="42" id="UCp-hf-JBC"/>
-                            <constraint firstItem="iby-Mv-6fG" firstAttribute="centerX" secondItem="o9T-9S-G3r" secondAttribute="centerX" id="WWO-6u-tiN"/>
                             <constraint firstItem="Lfq-eh-czJ" firstAttribute="leading" secondItem="INj-v4-L8c" secondAttribute="leading" id="XfP-fa-fh3"/>
+                            <constraint firstItem="Maa-gu-sR9" firstAttribute="centerX" secondItem="o9T-9S-G3r" secondAttribute="centerX" id="aNi-BV-hxq"/>
+                            <constraint firstItem="Maa-gu-sR9" firstAttribute="top" secondItem="INj-v4-L8c" secondAttribute="bottom" constant="92" id="f09-Sf-Ito"/>
+                            <constraint firstItem="Maa-gu-sR9" firstAttribute="trailing" secondItem="INj-v4-L8c" secondAttribute="trailing" id="fKt-Rj-zgk"/>
+                            <constraint firstItem="eeT-JH-qK3" firstAttribute="top" secondItem="Maa-gu-sR9" secondAttribute="bottom" constant="140" id="ju9-jK-YN4"/>
                             <constraint firstItem="Lfq-eh-czJ" firstAttribute="centerX" secondItem="aNY-0j-b2l" secondAttribute="centerX" id="m9U-dN-C7h"/>
                             <constraint firstItem="UQu-HV-Mac" firstAttribute="top" secondItem="AaE-jZ-aoR" secondAttribute="bottom" constant="91" id="sVs-0q-xl8"/>
                             <constraint firstItem="INj-v4-L8c" firstAttribute="centerY" secondItem="o9T-9S-G3r" secondAttribute="centerY" id="t9C-jh-YIp"/>
@@ -86,6 +86,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="Lfq-eh-czJ" id="q8p-1t-rS1"/>
                         <outlet property="passwordTextField" destination="INj-v4-L8c" id="Szh-lG-38z"/>
+                        <segue destination="15v-8Q-w8W" kind="unwind" identifier="unwindToForm" unwindAction="unwindToForm:" id="kjJ-r3-WZf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nQw-rX-pki" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -248,7 +249,6 @@
                         <outlet property="storeNameTextField" destination="klA-ZY-ppa" id="AJZ-8K-s99"/>
                         <outlet property="storeNumTextField" destination="asJ-MT-uQ6" id="YCO-2c-Jbj"/>
                         <segue destination="PbO-2D-PTa" kind="show" identifier="loginView" id="4hn-Be-UDW"/>
-                        <segue destination="15v-8Q-w8W" kind="unwind" unwindAction="unwindSegue:" id="ira-h3-Hfj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -275,7 +275,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Button" width="131" height="54"/>
         <image name="UploadImage" width="118" height="142"/>
     </resources>
 </document>

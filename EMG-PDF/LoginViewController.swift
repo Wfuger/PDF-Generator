@@ -14,13 +14,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBAction func loginAction(sender: UIButton) {
-        
-        if (checkLogin(self.emailTextField.text!, password: self.passwordTextField.text!)) {
-            self.performSegueWithIdentifier("dismissLogin", sender: self)
-        }
-        
-    }
+
     let emailKey = "batman@ex.com"
     let passwordKey = "nananana"
     
@@ -29,9 +23,15 @@ class LoginViewController: UIViewController {
 
     }
     
-    @IBAction override func unwindForSegue(unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+    @IBAction func login(sender: AnyObject) {
         
+        self.performSegueWithIdentifier("unwindToForm", sender: self)
+        print("wtf")
+        if (checkLogin(self.emailTextField.text!, password: self.passwordTextField.text!)) {
+            
+        }
     }
+    
 
     func checkLogin(email:String, password:String) -> Bool {
         if ((email == emailKey) && (password == passwordKey)){
@@ -40,7 +40,5 @@ class LoginViewController: UIViewController {
             return false
         }
     }
-    
-
 
 }

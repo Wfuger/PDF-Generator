@@ -25,11 +25,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         super.awakeFromNib()
     }
     
-    @IBAction func unwindSegue(segue: UIStoryboardSegue) {
-        
-        isAuthenticated = true
-        view.alpha = 1.0
-    }
+    @IBAction func unwindToForm(segue: UIStoryboardSegue) {}
+    
+
     
 //    func appWillResignActive(notification : NSNotification) {
 //        
@@ -44,6 +42,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 //            self.showLoginView()
 //        }
     }
+    
     
     
     override func viewDidAppear(animated: Bool) {
