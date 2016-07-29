@@ -15,16 +15,15 @@ class ImagesViewController: UIViewController,
                             UINavigationControllerDelegate,
                             CustomOverlayDelegate {
     
-    var isTakingPhotos = false
     var imagePicker = UIImagePickerController()
     var counter = 0
+    let url = "http://wills-macbook-air.local:3000/api/V1/2/bob"
     
     @IBAction func getImages(
         sender: AnyObject)
     {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             imagePicker = UIImagePickerController()
-            isTakingPhotos = true
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
             imagePicker.allowsEditing = false
@@ -64,8 +63,15 @@ class ImagesViewController: UIViewController,
         let success = SSZipArchive.createZipFileAtPath(zipPath, withContentsOfDirectory: photoPath as String)
         if success {
             print(success)
+            let api = API_Manager()
+            api.postZip(url, filePath: zipPath, completion: didPostZip)
         }
         
+    }
+    
+    func didPostZip(string: String) {
+        print(string)
+        print("Respons from server")
     }
     
     func tempZipPath() -> String {
@@ -116,8 +122,9 @@ class ImagesViewController: UIViewController,
             compressedData.writeToFile(filename, atomically: true)
             let compressedImage = UIImage(data: compressedData)
             UIImageWriteToSavedPhotosAlbum(compressedImage!, self,nil, nil)
+            print("Success")
         }
-        print("Success")
+        
     }
     
     //What to do if the image picker cancels.

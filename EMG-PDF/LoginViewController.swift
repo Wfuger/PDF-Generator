@@ -24,12 +24,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login(sender: AnyObject) {
-        
         self.performSegueWithIdentifier("unwindToForm", sender: self)
         print("wtf")
-        if (checkLogin(self.emailTextField.text!, password: self.passwordTextField.text!)) {
-            
-        }
+//        if (checkLogin(self.emailTextField.text!, password: self.passwordTextField.text!)) {
+//            
+//        }
     }
     
 

@@ -18,6 +18,8 @@
 		76FAEC221D43E30F0001BC68 /* CustomOverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FAEC201D43E30F0001BC68 /* CustomOverlayController.swift */; };
 		76FAEC231D43E30F0001BC68 /* CustomOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76FAEC211D43E30F0001BC68 /* CustomOverlayController.xib */; };
 		76FAEC251D43E34C0001BC68 /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FAEC241D43E34C0001BC68 /* CustomOverlayView.swift */; };
+		76FAEC271D4819590001BC68 /* API_Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FAEC261D4819590001BC68 /* API_Manager.swift */; };
+		76FAEC291D481CAE0001BC68 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FAEC281D481CAE0001BC68 /* constants.swift */; };
 		D7B00E26E85FD82C90CF2CD1 /* Pods_EMG_PDF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38774012DD6628E812CE6C25 /* Pods_EMG_PDF.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		76FAEC201D43E30F0001BC68 /* CustomOverlayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayController.swift; sourceTree = "<group>"; };
 		76FAEC211D43E30F0001BC68 /* CustomOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomOverlayController.xib; sourceTree = "<group>"; };
 		76FAEC241D43E34C0001BC68 /* CustomOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayView.swift; sourceTree = "<group>"; };
+		76FAEC261D4819590001BC68 /* API_Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API_Manager.swift; sourceTree = "<group>"; };
+		76FAEC281D481CAE0001BC68 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		E5B76E52DE20CB7F1BE0B343 /* Pods-EMG-PDF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMG-PDF.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMG-PDF/Pods-EMG-PDF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +89,8 @@
 		762886161D244899002A8DF1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				76FAEC261D4819590001BC68 /* API_Manager.swift */,
+				76FAEC281D481CAE0001BC68 /* constants.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -271,12 +277,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76FAEC271D4819590001BC68 /* API_Manager.swift in Sources */,
 				762886151D244893002A8DF1 /* LoginViewController.swift in Sources */,
 				76FAEC221D43E30F0001BC68 /* CustomOverlayController.swift in Sources */,
 				76FAEC251D43E34C0001BC68 /* CustomOverlayView.swift in Sources */,
 				762886051D22FBA9002A8DF1 /* ViewController.swift in Sources */,
 				762886201D24BA0C002A8DF1 /* ImagesViewController.swift in Sources */,
 				762886031D22FBA9002A8DF1 /* AppDelegate.swift in Sources */,
+				76FAEC291D481CAE0001BC68 /* constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
