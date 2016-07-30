@@ -1,15 +1,18 @@
 PODS:
   - Alamofire (3.4.1)
+  - PDFGenerator (1.4.0)
   - SSZipArchive (1.2)
 
 DEPENDENCIES:
   - Alamofire
+  - PDFGenerator
   - SSZipArchive
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  PDFGenerator: 2ebc46e9c0e051542a31e0e67dc09e2f12c0fc77
   SSZipArchive: 251093c65f98d6ea282c50bc404bfa631d9fd721
 
-PODFILE CHECKSUM: 697fb30b83bdaee7841b2d6299a72d17a1b2a19c
+PODFILE CHECKSUM: f33709c5e36338b973117f77bfe4f87765fab936
 
 COCOAPODS: 1.0.1

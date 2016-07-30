@@ -8,6 +8,7 @@
 
 import UIKit
 import SSZipArchive
+import PDFGenerator
 
 
 class ImagesViewController: UIViewController,
@@ -104,8 +105,7 @@ class ImagesViewController: UIViewController,
         imagePicker.takePicture()
     }
     func getDocumentsDirectory() -> NSString {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let documentsDirectory = paths[0]
+        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         return documentsDirectory
     }
     
@@ -132,6 +132,31 @@ class ImagesViewController: UIViewController,
         picker: UIImagePickerController)
     {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func generatePDF() {
+        var images = [UIImage]()
+        let imageString = getDocumentsDirectory()
+        let imageUrl = NSURL(string: imageString as String)
+        do {
+            var storedImages: [String] {
+                let imgs = try! (NSFileManager().contentsOfDirectoryAtPath(imageString as String))
+//                let imgs = try! (NSFileManager().contentsOfDirectoryAtURL(imageUrl!, includingPropertiesForKeys: nil, options: [.SkipsHiddenFiles, .SkipsSubdirectoryDescendants, .SkipsPackageDescendants]) as [String])
+                return imgs
+            }
+            for file in storedImages {
+//                images.append(file)
+                let img = UIImage(contentsOfFile: file)
+                images.append(img!)
+            }
+        }
+        
+        for (index, image) in images {
+            let pageNum = "page\(index)"
+            let page = PDFPage.Image(image)
+            
+            
+        }
     }
     
     /*

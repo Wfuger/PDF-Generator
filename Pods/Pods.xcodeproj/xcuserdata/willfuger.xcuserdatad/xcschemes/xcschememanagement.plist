@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PDFGenerator.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-EMG-PDF.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>32DF339F46D1254057F86ED38462B236</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E4869E033D790B758FA8E3BDCD405305</key>
+		<key>8F806EFF424F5CFC81E2FEC7BFB5B126</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C45F8A2B24FD081FC4D68FC20014851A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F926DEB100A8330346CDB2E7A4FD34B9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
