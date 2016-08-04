@@ -9,12 +9,14 @@
 import UIKit
 import SSZipArchive
 import PDFGenerator
+import ImagePicker
 
 
 class ImagesViewController: UIViewController,
                             UIImagePickerControllerDelegate,
                             UINavigationControllerDelegate,
-                            CustomOverlayDelegate {
+                            CustomOverlayDelegate,
+                            ImagePickerDelegate {
     
     var imagePicker = UIImagePickerController()
     var counter = 0
@@ -59,20 +61,41 @@ class ImagesViewController: UIViewController,
         
     }
     @IBAction func zipButton(sender: AnyObject) {
-        let zipPath = tempZipPath()
-        let photoPath = getDocumentsDirectory()
-        let success = SSZipArchive.createZipFileAtPath(zipPath, withContentsOfDirectory: photoPath as String)
-        if success {
-            print(success)
-            let api = API_Manager()
-            api.postZip(url, filePath: zipPath, completion: didPostZip)
-        }
+        let imagePickerController = ImagePickerController()
+        imagePickerController.delegate = self
+        presentViewController(imagePickerController, animated: true, completion: nil)
+        
+//        pickerController.defaultSelectedAssets = [UIImage]
+//        var imageAssets: [UIImage]?
+        
+//        pickerController.didSelectAssets = { (assets: [DKAsset]) in
+//            print("didSelectAssets")
+//            for asset in assets {
+//                let imageAsset = asset as? UIImage
+//                imageAssets?.append(imageAsset!)
+//            }
+//            print(assets)
+//        }
+        
+        
+        
+//        self.presentViewController(pickerController, animated: true) {}
+        
+        
+//        let zipPath = tempZipPath()
+//        let photoPath = getDocumentsDirectory()
+//        let success = SSZipArchive.createZipFileAtPath(zipPath, withContentsOfDirectory: photoPath as String)
+//        if success {
+//            print(success)
+//            let api = API_Manager()
+//            api.postZip(url, filePath: zipPath, completion: didPostZip)
+//        }
         
     }
     
     func didPostZip(string: String) {
         print(string)
-        print("Respons from server")
+        print("Response from server")
     }
     
     func tempZipPath() -> String {
@@ -92,6 +115,26 @@ class ImagesViewController: UIViewController,
         super.didReceiveMemoryWarning()
         print("SHIT")
     }
+    
+    func wrapperDidPress(images: [UIImage]) {
+        print("Images from wrapper\(images)")
+    }
+    func doneButtonDidPress(images: [UIImage]) {
+        print("Images from Done Buttons \(images)")
+        for image in images {
+            if let compressedData = UIImageJPEGRepresentation(image, 0.6)
+            {
+                let filename = getDocumentsDirectory().stringByAppendingPathComponent("\(counter)copy.jpg")
+                print(filename)
+                compressedData.writeToFile(filename, atomically: true)
+                let compressedImage = UIImage(data: compressedData)
+                UIImageWriteToSavedPhotosAlbum(compressedImage!, self,nil, nil)
+                print("Success")
+                counter += 1
+            }
+        }
+    }
+    func cancelButtonDidPress() {}
     
     func done(overlayView: CustomOverlayView) {
         print("done")
@@ -151,12 +194,16 @@ class ImagesViewController: UIViewController,
             }
         }
         
-        for (index, image) in images {
-            let pageNum = "page\(index)"
-            let page = PDFPage.Image(image)
-            
-            
-        }
+        let v1 = UIView(frame: CGRectMake(0, 0, 200, 200))
+        
+        
+//        
+//        for (index, image) in images {
+//            let pageNum = "page\(index)"
+//            let page = PDFPage.Image(image)
+//            
+//            
+//        }
     }
     
     /*

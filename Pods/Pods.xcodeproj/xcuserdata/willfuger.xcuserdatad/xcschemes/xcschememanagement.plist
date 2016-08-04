@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ImagePicker-ImagePicker.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ImagePicker.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>PDFGenerator.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,12 +42,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8F806EFF424F5CFC81E2FEC7BFB5B126</key>
+		<key>7B1A057D8ABF48899E806A4211E9A30D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C45F8A2B24FD081FC4D68FC20014851A</key>
+		<key>7BC15C8DB2C5DEBD2CB4D2638B8B5F12</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9F0C00D382F5E8DDCDB2C3728E9E677E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A2330A8237B9F93884A5FC77CE29B114</key>
 		<dict>
 			<key>primary</key>
 			<true/>

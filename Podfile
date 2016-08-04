@@ -7,5 +7,6 @@ target 'EMG-PDF' do
   pod 'Alamofire'
   pod 'SSZipArchive'
   pod 'PDFGenerator'
+  pod 'ImagePicker'
 
 end
