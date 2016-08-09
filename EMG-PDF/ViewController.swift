@@ -22,10 +22,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     var didReturnFromBackground = false
      
     override func awakeFromNib() {
+        
         super.awakeFromNib()
+        
     }
     
-    @IBAction func unwindToForm(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToForm(segue: UIStoryboardSegue) {
+        
+    }
     
 
     
@@ -58,7 +62,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
+        
     }
     
 //    func showLoginView() {
@@ -84,12 +90,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
     }
     
+    // Keyboard closes when user hits enter
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
         return true
     }
     
+    // Keyboard resides when touching elsewhere on screen
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -106,13 +114,20 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     // The data to return for the row and component (column) that's being passed in
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
         return pickerData[row]
+        
     }
 
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
         print(pickerData[row])
         // This method is triggered whenever the user makes a change to the picker selection.
         // The parameter named row and component represents what was selected.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
     }
     
 }

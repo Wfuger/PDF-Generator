@@ -19,8 +19,10 @@ class ImagesViewController: UIViewController,
                             ImagePickerDelegate {
     
     var imagePicker = UIImagePickerController()
-    var counter = 0
+    var imagePickerController = ImagePickerController()
+    var counter = 1
     let url = "http://wills-macbook-air.local:3000/api/V1/2/bob"
+    var form: [String : String]?
     
     @IBAction func getImages(
         sender: AnyObject)
@@ -61,27 +63,9 @@ class ImagesViewController: UIViewController,
         
     }
     @IBAction func zipButton(sender: AnyObject) {
-        let imagePickerController = ImagePickerController()
+        imagePickerController = ImagePickerController()
         imagePickerController.delegate = self
         presentViewController(imagePickerController, animated: true, completion: nil)
-        
-//        pickerController.defaultSelectedAssets = [UIImage]
-//        var imageAssets: [UIImage]?
-        
-//        pickerController.didSelectAssets = { (assets: [DKAsset]) in
-//            print("didSelectAssets")
-//            for asset in assets {
-//                let imageAsset = asset as? UIImage
-//                imageAssets?.append(imageAsset!)
-//            }
-//            print(assets)
-//        }
-        
-        
-        
-//        self.presentViewController(pickerController, animated: true) {}
-        
-        
 //        let zipPath = tempZipPath()
 //        let photoPath = getDocumentsDirectory()
 //        let success = SSZipArchive.createZipFileAtPath(zipPath, withContentsOfDirectory: photoPath as String)
@@ -108,7 +92,6 @@ class ImagesViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -119,10 +102,13 @@ class ImagesViewController: UIViewController,
     func wrapperDidPress(images: [UIImage]) {
         print("Images from wrapper\(images)")
     }
-    func doneButtonDidPress(images: [UIImage]) {
+    
+    func doneButtonDidPress(images: [UIImage])
+    {
         print("Images from Done Buttons \(images)")
-        for image in images {
-            if let compressedData = UIImageJPEGRepresentation(image, 0.6)
+        for image in images
+        {
+            if let compressedData = UIImageJPEGRepresentation(image, 1)
             {
                 let filename = getDocumentsDirectory().stringByAppendingPathComponent("\(counter)copy.jpg")
                 print(filename)
@@ -133,21 +119,29 @@ class ImagesViewController: UIViewController,
                 counter += 1
             }
         }
+        self.imagePickerController.dismissViewControllerAnimated(true, completion: nil)
     }
-    func cancelButtonDidPress() {}
+    func cancelButtonDidPress()
+    {
+        self.imagePickerController.dismissViewControllerAnimated(true, completion: nil)
+    }
     
-    func done(overlayView: CustomOverlayView) {
+    func done(overlayView: CustomOverlayView)
+    {
         print("done")
         self.imagePicker.dismissViewControllerAnimated(true, completion: nil)
     }
-    func cancel(overlayView: CustomOverlayView) {
+    func cancel(overlayView: CustomOverlayView)
+    {
         print("cancelled")
         self.imagePicker.dismissViewControllerAnimated(true, completion: nil)
     }
-    func takePic(overlayView: CustomOverlayView) {
+    func takePic(overlayView: CustomOverlayView)
+    {
         imagePicker.takePicture()
     }
-    func getDocumentsDirectory() -> NSString {
+    func getDocumentsDirectory() -> NSString
+    {
         let documentsDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         return documentsDirectory
     }
@@ -177,33 +171,109 @@ class ImagesViewController: UIViewController,
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func generatePDF() {
+    func generatePDF()
+    {
         var images = [UIImage]()
         let imageString = getDocumentsDirectory()
-        let imageUrl = NSURL(string: imageString as String)
-        do {
-            var storedImages: [String] {
-                let imgs = try! (NSFileManager().contentsOfDirectoryAtPath(imageString as String))
-//                let imgs = try! (NSFileManager().contentsOfDirectoryAtURL(imageUrl!, includingPropertiesForKeys: nil, options: [.SkipsHiddenFiles, .SkipsSubdirectoryDescendants, .SkipsPackageDescendants]) as [String])
-                return imgs
+        do
+        {
+            var storedImages: [String]
+            {
+                return try! (NSFileManager().contentsOfDirectoryAtPath(imageString as String))
             }
-            for file in storedImages {
-//                images.append(file)
+            for file in storedImages
+            {
                 let img = UIImage(contentsOfFile: file)
                 images.append(img!)
             }
         }
-        
         let v1 = UIView(frame: CGRectMake(0, 0, 200, 200))
+        let emgMainImg = UIImage(named: "EMG-Main.png")
+        let emgMainImgView = UIImageView(image: emgMainImg!)
+        emgMainImgView.frame = CGRectMake(25, 25, 150, 150)
+        v1.addSubview(emgMainImgView)
+        let photoSheetForm = UIView(frame: CGRectMake(0, 0, 200, 200))
+        let mainImgPage = UIView(frame: CGRectMake(0, 0, 200, 200))
+        let page1 = PDFPage.View(v1)
+        let page2 = PDFPage.View(photoSheetForm)
+        let page3 = PDFPage.View(mainImgPage)
+        var pages = [PDFPage]()
+        pages.append(page1)
+        pages.append(page2)
+        pages.append(page3)
+        for (i, img) in images.enumerate()
+        {
+            switch i
+            {
+                case images.count - 3:
+                    let page = UIView(frame: CGRectMake(0, 0, 200, 200))
+                    let img1 = UIImageView(image: img)
+                    let img2 = UIImageView(image: images[i+1])
+                    let img3 = UIImageView(image: images[i+2])
+                    img1.frame = CGRectMake(25, 25, 75, 75)
+                    img2.frame = CGRectMake(25, 175, 75, 75)
+                    img3.frame = CGRectMake(175, 25, 75, 75)
+                    page.addSubview(img1)
+                    page.addSubview(img2)
+                    page.addSubview(img3)
+                    let pagePDF = PDFPage.View(page)
+                    pages.append(pagePDF)
+                case images.count - 2:
+                    let page = UIView(frame: CGRectMake(0, 0, 200, 200))
+                    let img1 = UIImageView(image: img)
+                    let img2 = UIImageView(image: images[i+1])
+                    img1.frame = CGRectMake(25, 25, 75, 75)
+                    img2.frame = CGRectMake(25, 175, 75, 75)
+                    page.addSubview(img1)
+                    page.addSubview(img2)
+                    let pagePDF = PDFPage.View(page)
+                    pages.append(pagePDF)
+                case images.count - 1:
+                    let page = UIView(frame: CGRectMake(0, 0, 200, 200))
+                    let img = UIImageView(image: img)
+                    img.frame = CGRectMake(25, 25, 75, 75)
+                    page.addSubview(img)
+                    let pagePDF = PDFPage.View(page)
+                    pages.append(pagePDF)
+                default:
+                    break
+            }
+            if i % 4 == 0 || i == 0
+            {
+                if i == images.count - 1 {
+                    return
+                }
+                else
+                {
+                    let page = UIView(frame: CGRectMake(0, 0, 200, 200))
+                    let img1 = UIImageView(image: img)
+                    let img2 = UIImageView(image: images[i+1])
+                    let img3 = UIImageView(image: images[i+2])
+                    let img4 = UIImageView(image: images[i+3])
+                    img1.frame = CGRectMake(25, 25, 75, 75)
+                    img2.frame = CGRectMake(25, 175, 75, 75)
+                    img3.frame = CGRectMake(175, 25, 75, 75)
+                    img4.frame = CGRectMake(175, 175, 75, 75)
+                    page.addSubview(img1)
+                    page.addSubview(img2)
+                    page.addSubview(img3)
+                    page.addSubview(img4)
+                    let pagePDF = PDFPage.View(page)
+                    pages.append(pagePDF)
+                }
+            }
+        }
+        let dst = NSHomeDirectory().stringByAppendingString("/blah.pdf")
+        do
+        {
+            try PDFGenerator.generate(pages, outputPath: dst)
+        }
+        catch (let error)
+        {
+            print(error)
+        }
         
         
-//        
-//        for (index, image) in images {
-//            let pageNum = "page\(index)"
-//            let page = PDFPage.Image(image)
-//            
-//            
-//        }
     }
     
     /*
