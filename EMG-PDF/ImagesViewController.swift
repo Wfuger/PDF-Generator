@@ -27,6 +27,8 @@ class ImagesViewController: UIViewController,
     var pages = [PDFPage]()
     
     
+    
+    
     @IBAction func mainImgFromLibrary(sender: AnyObject) {
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -63,6 +65,10 @@ class ImagesViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let footerImg = UIImage(named: "footer.png")
+        let footerView = UIImageView(image: footerImg!)
+        footerView.frame = CGRectMake(0, 66, 60, 9)
+        
         let v1 = UIView(frame: CGRectMake(0, 0, 100, 75))
         v1.backgroundColor = UIColor.whiteColor()
         let emgMainImg = UIImage(named: "EMG-Main.png")
@@ -71,6 +77,50 @@ class ImagesViewController: UIViewController,
         v1.addSubview(emgMainImgView)
         let photoSheetForm = UIView(frame: CGRectMake(0, 0, 100, 75))
         photoSheetForm.backgroundColor = UIColor.whiteColor()
+        photoSheetForm.addSubview(footerView)
+        let photoSheetTitle = UILabel(frame: CGRectMake(18.43, 18.97, 63.4, 7.2))
+        photoSheetTitle.text = "Photo Sheet"
+        photoSheetTitle.textAlignment = NSTextAlignment.Center
+        photoSheetTitle.font = UIFont.boldSystemFontOfSize(5)
+        
+        photoSheetTitle.layer.borderColor = UIColor.blackColor().CGColor
+        photoSheetTitle.layer.borderWidth = 0.05
+        photoSheetForm.addSubview(photoSheetTitle)
+        let label1 = UILabel(frame: CGRectMake(18.43, 26.17, 20.5, 7.2))
+        label1.text = "Store #:"
+        label1.textAlignment = NSTextAlignment.Right
+//        label1.font = UIFont.boldSystemFontOfSize(4)
+        label1.layer.borderColor = UIColor.blackColor().CGColor
+        label1.layer.borderWidth = 0.05
+        photoSheetForm.addSubview(label1)
+        let label2 = UILabel(frame: CGRectMake(18.43, 33.37, 20.5, 7.2))
+        label2.text = "Store Name:"
+        label2.textAlignment = NSTextAlignment.Right
+//        label2.font = UIFont.boldSystemFontOfSize(4)
+        label2.layer.borderColor = UIColor.blackColor().CGColor
+        label2.layer.borderWidth = 0.05
+        photoSheetForm.addSubview(label2)
+        let label3 = UILabel(frame: CGRectMake(18.43, 40.57, 20.5, 7.2))
+        label3.text = "Project Name:"
+        label3.textAlignment = NSTextAlignment.Right
+//        label3.font = UIFont.boldSystemFontOfSize(4)
+        label3.layer.borderColor = UIColor.blackColor().CGColor
+        label3.layer.borderWidth = 0.05
+        photoSheetForm.addSubview(label3)
+        let label4 = UILabel(frame: CGRectMake(18.43, 47.77, 20.5, 7.2))
+        label4.text = "Project Manager:"
+        label4.textAlignment = NSTextAlignment.Right
+//        label4.font = UIFont.boldSystemFontOfSize(4)
+        label4.layer.borderColor = UIColor.blackColor().CGColor
+        label4.layer.borderWidth = 0.05
+        photoSheetForm.addSubview(label4)
+        let label5 = UILabel(frame: CGRectMake(18.43, 54.97, 20.5, 7.2))
+        label5.text = "Date:"
+        label5.textAlignment = NSTextAlignment.Right
+//        label5.font = UIFont.boldSystemFontOfSize(4)
+        label5.layer.borderColor = UIColor.blackColor().CGColor
+        label5.layer.borderWidth = 0.05
+        photoSheetForm.addSubview(label5)
         let page1 = PDFPage.View(v1)
         let page2 = PDFPage.View(photoSheetForm)
         pages.append(page1)
@@ -90,6 +140,9 @@ class ImagesViewController: UIViewController,
     
     func doneButtonDidPress(images: [UIImage])
     {
+        let footerImg = UIImage(named: "footer.png")
+        let footerView = UIImageView(image: footerImg!)
+        footerView.frame = CGRectMake(0, 66, 60, 9)
         for image in images
         {
             
@@ -122,6 +175,7 @@ class ImagesViewController: UIViewController,
                 page.addSubview(img1)
                 page.addSubview(img2)
                 page.addSubview(img3)
+                page.addSubview(footerView)
                 let pagePDF = PDFPage.View(page)
                 pages.append(pagePDF)
                 print("pages count \(pages.count)")
@@ -138,6 +192,7 @@ class ImagesViewController: UIViewController,
                 img2.frame = CGRectMake(x2, y1, width, height)
                 page.addSubview(img1)
                 page.addSubview(img2)
+                page.addSubview(footerView)
                 let pagePDF = PDFPage.View(page)
                 pages.append(pagePDF)
                 print("pages count \(pages.count)")
@@ -151,6 +206,7 @@ class ImagesViewController: UIViewController,
                 let img = UIImageView(image: miniImages[i + 1])
                 img.frame = CGRectMake(x1, y1, width, height)
                 page.addSubview(img)
+                page.addSubview(footerView)
                 let pagePDF = PDFPage.View(page)
                 pages.append(pagePDF)
                 print("pages count \(pages.count)")
@@ -179,6 +235,10 @@ class ImagesViewController: UIViewController,
                     page.addSubview(img2)
                     page.addSubview(img3)
                     page.addSubview(img4)
+                    let footerImg = UIImage(named: "footer.png")
+                    let footerView = UIImageView(image: footerImg!)
+                    footerView.frame = CGRectMake(0, 66, 60, 9)
+                    page.addSubview(footerView)
                     let pagePDF = PDFPage.View(page)
                     pages.append(pagePDF)
                     print("pages count \(pages.count)")
@@ -206,14 +266,18 @@ class ImagesViewController: UIViewController,
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
         if let compressedData = UIImageJPEGRepresentation(chosenImage, 0.1)
         {
+            let footerImg = UIImage(named: "footer.png")
+            let footerView = UIImageView(image: footerImg!)
+            footerView.frame = CGRectMake(0, 66, 60, 9)
             let compressedImage = UIImage(data: compressedData)
-//            UIImageWriteToSavedPhotosAlbum(compressedImage!, self,nil, nil)
+            UIImageWriteToSavedPhotosAlbum(compressedImage!, self,nil, nil)
             print("Success")
             let mainImagePage = UIView(frame: CGRectMake(0, 0, 100, 75))
             mainImagePage.backgroundColor = UIColor.whiteColor()
             let mainImageView = UIImageView(image: compressedImage!)
             mainImageView.frame = CGRectMake(12.8, 9.73, 74.8, 55.6)
             mainImagePage.addSubview(mainImageView)
+            mainImagePage.addSubview(footerView)
             let mainImgPDF = PDFPage.View(mainImagePage)
             pages.append(mainImgPDF)
         }
@@ -236,9 +300,9 @@ class ImagesViewController: UIViewController,
         print("pages count \(pages.count)")
         let finalPage = UIView(frame: CGRectMake(0, 0, 100, 75))
         finalPage.backgroundColor = UIColor.whiteColor()
-//        let finalImg = UIImageView(frame: CGRectMake(10, 10, 180, 180))
-//        finalImg.image = UIImage(named: "finalImg.png")
-//        finalPage.addSubview(finalImg)
+        let finalImg = UIImageView(frame: CGRectMake(2.5, 2.5, 95, 55.5))
+        finalImg.image = UIImage(named: "endImg.png")
+        finalPage.addSubview(finalImg)
         let finalPDFPage = PDFPage.View(finalPage)
         pages.append(finalPDFPage)
         let dst = getDocumentsDirectory().stringByAppendingString("/blah.pdf")
@@ -273,7 +337,7 @@ class ImagesViewController: UIViewController,
             if let fileData = NSData(contentsOfFile: pdfDestination)
             {
                 print("File data loaded.")
-                mailComposer.addAttachmentData(fileData, mimeType: "application/pdf", fileName: "blah")
+                mailComposer.addAttachmentData(fileData, mimeType: "application/pdf", fileName: "blah.pdf")
             }
             self.presentViewController(mailComposer, animated: true, completion: nil)
         }
@@ -282,12 +346,6 @@ class ImagesViewController: UIViewController,
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: nil)
-        if (error != nil) {
-            print(error!)
-        }
-        if result == MFMailComposeResultSent {
-            print("Fuck yeah bitches, but wheres my email?")
-        }
     }
     
     /*
