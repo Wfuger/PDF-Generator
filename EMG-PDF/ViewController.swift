@@ -15,11 +15,25 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var projectNamePicker: UIPickerView!
     
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    @IBAction func addImagesBtn(sender: AnyObject) {
+        
+        form["storeNum"] = storeNumTextField.text!
+        form["storeName"] = storeNameTextField.text!
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        let dateStr = dateFormatter.stringFromDate(datePicker.date)
+        form["date"] = dateStr
+//        form["projectMngName"] = 
+    }
     var pickerData = [String]()
     
     var isAuthenticated = true
     
     var didReturnFromBackground = false
+    
+    var form = [String:String]()
      
     override func awakeFromNib() {
         
@@ -78,13 +92,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        storeNameTextField.layer.borderColor = UIColor.blackColor().CGColor
-        storeNumTextField.layer.borderColor = UIColor.blackColor().CGColor
+        self.storeNameTextField.layer.borderColor = UIColor.blackColor().CGColor
+        self.storeNumTextField.layer.borderColor = UIColor.blackColor().CGColor
         
         self.projectNamePicker.dataSource = self
         self.projectNamePicker.delegate = self
         self.storeNumTextField.delegate = self
         self.storeNameTextField.delegate = self
+        
+        
         
         pickerData = ["90% Walk", "Pre-bid Walk", "Pre-Con Walk", "Weekly Visit", "Punch Walk"]
         
@@ -122,13 +138,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         print(pickerData[row])
+        
+        form["projectName"] = pickerData[row]
         // This method is triggered whenever the user makes a change to the picker selection.
         // The parameter named row and component represents what was selected.
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+        if segue.identifier == "imagesSegue"
+        {
+            let controller = segue.destinationViewController as! ImagesViewController
+            controller.form = self.form
+        }
     }
-    
 }
 

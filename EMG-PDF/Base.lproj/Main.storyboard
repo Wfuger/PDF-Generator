@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GyD-La-gZi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GyD-La-gZi">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -109,7 +109,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73t-x9-6H7">
                                 <rect key="frame" x="240" y="224" width="120" height="151"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="fMG-xy-EkD"/>
+                                    <constraint firstAttribute="width" constant="120" id="64W-dD-Bwc"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="UploadImage"/>
                                 <connections>
@@ -120,24 +120,57 @@
                                 <rect key="frame" x="208" y="383" width="185" height="52"/>
                                 <color key="backgroundColor" red="0.009605911560356617" green="0.37218612432479858" blue="0.97029703855514526" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="185" id="O5g-94-w58"/>
+                                    <constraint firstAttribute="width" constant="185" id="OEG-6b-Lpq"/>
                                 </constraints>
-                                <state key="normal" title="Zip">
+                                <state key="normal" title="Generate PDF">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="zipButton:" destination="oP9-5i-btx" eventType="touchUpInside" id="6Zc-ry-sOU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lj9-o4-x6P">
+                                <rect key="frame" x="254" y="186" width="93" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="5DQ-bb-bAV"/>
+                                </constraints>
+                                <state key="normal" title="From Camera"/>
+                                <connections>
+                                    <action selector="mainImgSelector:" destination="oP9-5i-btx" eventType="touchUpInside" id="5K2-Fv-Imm"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Images" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfq-FA-6l1">
+                                <rect key="frame" x="255" y="307" width="91" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICT-LE-7Kq">
+                                <rect key="frame" x="257" y="148" width="87" height="30"/>
+                                <state key="normal" title="From Library"/>
+                                <connections>
+                                    <action selector="mainImgFromLibrary:" destination="oP9-5i-btx" eventType="touchUpInside" id="dGm-YK-IRX"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Main Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ol9-gy-0r9">
+                                <rect key="frame" x="238" y="119" width="124" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9xM-5Z-hhd" firstAttribute="top" secondItem="73t-x9-6H7" secondAttribute="bottom" constant="8" symbolic="YES" id="ENh-RH-ZYb"/>
-                            <constraint firstItem="73t-x9-6H7" firstAttribute="centerY" secondItem="VrY-tN-aaY" secondAttribute="centerY" id="Em9-ft-F7b"/>
-                            <constraint firstItem="73t-x9-6H7" firstAttribute="top" secondItem="iK8-To-utB" secondAttribute="bottom" constant="160" id="dsN-OF-5Kd"/>
-                            <constraint firstItem="73t-x9-6H7" firstAttribute="centerX" secondItem="VrY-tN-aaY" secondAttribute="centerX" id="si5-sn-2FA"/>
-                            <constraint firstItem="cXc-7s-Weu" firstAttribute="top" secondItem="9xM-5Z-hhd" secondAttribute="bottom" constant="165" id="wCj-qx-E6A"/>
-                            <constraint firstItem="73t-x9-6H7" firstAttribute="centerX" secondItem="9xM-5Z-hhd" secondAttribute="centerX" id="wj1-zU-gwT"/>
+                            <constraint firstItem="cXc-7s-Weu" firstAttribute="top" secondItem="9xM-5Z-hhd" secondAttribute="bottom" constant="165" id="2qG-5n-HSt"/>
+                            <constraint firstItem="lj9-o4-x6P" firstAttribute="centerX" secondItem="73t-x9-6H7" secondAttribute="centerX" id="4Oi-AK-DB9"/>
+                            <constraint firstItem="lj9-o4-x6P" firstAttribute="centerX" secondItem="VrY-tN-aaY" secondAttribute="centerX" id="CYq-da-Sjn"/>
+                            <constraint firstItem="73t-x9-6H7" firstAttribute="centerY" secondItem="VrY-tN-aaY" secondAttribute="centerY" id="Lnx-XM-v6f"/>
+                            <constraint firstItem="73t-x9-6H7" firstAttribute="top" secondItem="lj9-o4-x6P" secondAttribute="bottom" constant="8" symbolic="YES" id="SxI-jP-9mn"/>
+                            <constraint firstItem="9xM-5Z-hhd" firstAttribute="top" secondItem="73t-x9-6H7" secondAttribute="bottom" constant="8" symbolic="YES" id="YHc-dW-VbJ"/>
+                            <constraint firstItem="9xM-5Z-hhd" firstAttribute="top" secondItem="Cfq-FA-6l1" secondAttribute="bottom" constant="55" id="b4T-Zp-vcq"/>
+                            <constraint firstItem="Cfq-FA-6l1" firstAttribute="centerX" secondItem="9xM-5Z-hhd" secondAttribute="centerX" id="jEJ-0a-fO5"/>
+                            <constraint firstItem="73t-x9-6H7" firstAttribute="centerX" secondItem="9xM-5Z-hhd" secondAttribute="centerX" id="rS7-en-0Ko"/>
+                            <constraint firstItem="lj9-o4-x6P" firstAttribute="top" secondItem="iK8-To-utB" secondAttribute="bottom" constant="122" id="w5k-rn-fro"/>
                         </constraints>
                     </view>
                     <connections>
@@ -237,7 +270,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="oP9-5i-btx" kind="show" id="P1I-5c-9m8"/>
+                                    <action selector="addImagesBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Vr-3S-ePD"/>
+                                    <segue destination="oP9-5i-btx" kind="show" identifier="imagesSegue" id="P1I-5c-9m8"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -266,6 +300,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="jZM-6h-AJy"/>
                     <connections>
+                        <outlet property="datePicker" destination="JHq-lF-Q2F" id="l9I-B5-vRp"/>
                         <outlet property="projectNamePicker" destination="bmD-bi-edc" id="rAE-3j-7uv"/>
                         <outlet property="storeNameTextField" destination="klA-ZY-ppa" id="AJZ-8K-s99"/>
                         <outlet property="storeNumTextField" destination="asJ-MT-uQ6" id="YCO-2c-Jbj"/>

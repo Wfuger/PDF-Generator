@@ -16,86 +16,66 @@ import MessageUI
 class ImagesViewController: UIViewController,
                             UIImagePickerControllerDelegate,
                             UINavigationControllerDelegate,
-                            CustomOverlayDelegate,
                             ImagePickerDelegate,
                             MFMailComposeViewControllerDelegate {
     
     var imagePicker = UIImagePickerController()
     var imagePickerController = ImagePickerController()
     var counter = 0
-    let url = "http://wills-macbook-air.local:3000/api/V1/2/bob"
     var form: [String : String]?
     var miniImages = [UIImage]()
+    var pages = [PDFPage]()
     
+    
+    @IBAction func mainImgFromLibrary(sender: AnyObject) {
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func mainImgSelector(sender: AnyObject) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+            imagePicker.allowsEditing = false
+            imagePicker.cameraCaptureMode = .Photo
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+    }
     @IBAction func getImages(
         sender: AnyObject)
     {
         imagePickerController = ImagePickerController()
         imagePickerController.delegate = self
         self.presentViewController(imagePickerController, animated: true, completion: nil)
-//        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-//            imagePicker = UIImagePickerController()
-//            imagePicker.delegate = self
-//            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
-//            imagePicker.allowsEditing = false
-//            imagePicker.cameraCaptureMode = .Photo
-//            imagePicker.showsCameraControls = false
-//            let customViewController = CustomOverlayController(
-//                nibName: "CustomOverlayController",
-//                bundle: nil
-//            )
-//            let customView: CustomOverlayView = customViewController.view as! CustomOverlayView
-//            customView.frame = imagePicker.view.frame
-//            customView.delegate = self
-//            imagePicker.modalPresentationStyle = .FullScreen
-//            self.presentViewController(imagePicker, animated: true, completion: {
-//                    self.imagePicker.cameraOverlayView = customView
-//                })
-//        } else {
-//            let alertVC = UIAlertController(
-//                title: "No Camera",
-//                message: "Sorry, this device has no camera",
-//                preferredStyle: .Alert)
-//            let okAction = UIAlertAction(
-//                title: "OK",
-//                style:.Default,
-//                handler: nil)
-//            alertVC.addAction(okAction)
-//            presentViewController(
-//                alertVC,
-//                animated: true,
-//                completion: nil)
-//        }
         
     }
     @IBAction func zipButton(sender: AnyObject) {
         generatePDF()
         
-//        let zipPath = tempZipPath()
-//        let photoPath = getDocumentsDirectory()
-//        let success = SSZipArchive.createZipFileAtPath(zipPath, withContentsOfDirectory: photoPath as String)
-//        if success {
-//            print(success)
-//            let api = API_Manager()
-//            api.postZip(url, filePath: zipPath, completion: didPostZip)
-//        }
         
     }
     
-//    func didPostZip(string: String) {
-//        print(string)
-//        print("Response from server")
-//    }
-    
-//    func tempZipPath() -> String {
-//        var path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
-//        path += "/\(NSUUID().UUIDString).zip"
-//        print("Zip Path \(path)")
-//        return path
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let v1 = UIView(frame: CGRectMake(0, 0, 100, 75))
+        v1.backgroundColor = UIColor.whiteColor()
+        let emgMainImg = UIImage(named: "EMG-Main.png")
+        let emgMainImgView = UIImageView(image: emgMainImg!)
+        emgMainImgView.frame = CGRectMake(2.5, 2.5, 95, 55.5)
+        v1.addSubview(emgMainImgView)
+        let photoSheetForm = UIView(frame: CGRectMake(0, 0, 100, 75))
+        photoSheetForm.backgroundColor = UIColor.whiteColor()
+        let page1 = PDFPage.View(v1)
+        let page2 = PDFPage.View(photoSheetForm)
+        pages.append(page1)
+        pages.append(page2)
+        print(form!)
         
     }
 
@@ -110,43 +90,109 @@ class ImagesViewController: UIViewController,
     
     func doneButtonDidPress(images: [UIImage])
     {
-//        print("Images from Done Buttons \(images)")
         for image in images
         {
             
-            if let compressedData = UIImageJPEGRepresentation(image, 0.5)
+            if let compressedData = UIImageJPEGRepresentation(image, 0.01)
             {
-//                let filename = getDocumentsDirectory().stringByAppendingPathComponent("\(counter).jpg")
-//                print(filename)
-//                compressedData.writeToFile(filename, atomically: true)
                 let compressedImage = UIImage(data: compressedData)
                 miniImages.append(compressedImage!)
-//                UIImageWriteToSavedPhotosAlbum(compressedImage!, self,nil, nil)
-//                print("Success")
-//                counter += 1
+                print("Image count \(miniImages.count)")
             }
         }
+        for (i, img) in miniImages.enumerate()
+        {
+            let width: CGFloat = 31.4
+            let height: CGFloat = 23.4
+            let x1: CGFloat = 10.25
+            let x2: CGFloat = 58.3
+            let y1: CGFloat = 13.15
+            let y2: CGFloat = 38.45
+            if miniImages.count % 4 == 3 && i == miniImages.count - 4
+            {
+                print("wtf mate 3 \(i)")
+                let page = UIView(frame: CGRectMake(0, 0, 100, 75))
+                page.backgroundColor = UIColor.whiteColor()
+                let img1 = UIImageView(image: miniImages[i + 1])
+                let img2 = UIImageView(image: miniImages[i + 2])
+                let img3 = UIImageView(image: miniImages[i + 3])
+                img1.frame = CGRectMake(x1, y1, width, height)
+                img2.frame = CGRectMake(x2, y1, width, height)
+                img3.frame = CGRectMake(x1, y2, width, height)
+                page.addSubview(img1)
+                page.addSubview(img2)
+                page.addSubview(img3)
+                let pagePDF = PDFPage.View(page)
+                pages.append(pagePDF)
+                print("pages count \(pages.count)")
+                
+            }
+            else if miniImages.count % 4 == 2 && i == miniImages.count - 3
+            {
+                print("wtf mate 2 \(i)")
+                let page = UIView(frame: CGRectMake(0, 0, 100, 75))
+                page.backgroundColor = UIColor.whiteColor()
+                let img1 = UIImageView(image: miniImages[i + 1])
+                let img2 = UIImageView(image: miniImages[i + 2])
+                img1.frame = CGRectMake(x1, y1, width, height)
+                img2.frame = CGRectMake(x2, y1, width, height)
+                page.addSubview(img1)
+                page.addSubview(img2)
+                let pagePDF = PDFPage.View(page)
+                pages.append(pagePDF)
+                print("pages count \(pages.count)")
+                
+            }
+            else if miniImages.count % 4 == 1 && i == miniImages.count - 2
+            {
+                print("wtf mate 1 \(i)")
+                let page = UIView(frame: CGRectMake(0, 0, 100, 75))
+                page.backgroundColor = UIColor.whiteColor()
+                let img = UIImageView(image: miniImages[i + 1])
+                img.frame = CGRectMake(x1, y1, width, height)
+                page.addSubview(img)
+                let pagePDF = PDFPage.View(page)
+                pages.append(pagePDF)
+                print("pages count \(pages.count)")
+                
+            }
+            else if i % 4 == 0 || i == 0
+            {
+                if (miniImages.count - i) <= 4
+                {
+                    break
+                }
+                else
+                {
+                    print("mini image page \(i)")
+                    let page = UIView(frame: CGRectMake(0, 0, 100, 75))
+                    page.backgroundColor = UIColor.whiteColor()
+                    let img1 = UIImageView(image: img)
+                    let img2 = UIImageView(image: miniImages[i + 1])
+                    let img3 = UIImageView(image: miniImages[i + 2])
+                    let img4 = UIImageView(image: miniImages[i + 3])
+                    img1.frame = CGRectMake(x1, y1, width, height)
+                    img2.frame = CGRectMake(x2, y1, width, height)
+                    img3.frame = CGRectMake(x1, y2, width, height)
+                    img4.frame = CGRectMake(x2, y2, width, height)
+                    page.addSubview(img1)
+                    page.addSubview(img2)
+                    page.addSubview(img3)
+                    page.addSubview(img4)
+                    let pagePDF = PDFPage.View(page)
+                    pages.append(pagePDF)
+                    print("pages count \(pages.count)")
+                }
+            }
+        }
+        miniImages.removeAll()
         self.imagePickerController.dismissViewControllerAnimated(true, completion: nil)
     }
     func cancelButtonDidPress()
     {
         self.imagePickerController.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    func done(overlayView: CustomOverlayView)
-    {
-        print("done")
-        self.imagePicker.dismissViewControllerAnimated(true, completion: nil)
-    }
-    func cancel(overlayView: CustomOverlayView)
-    {
-        print("cancelled")
-        self.imagePicker.dismissViewControllerAnimated(true, completion: nil)
-    }
-    func takePic(overlayView: CustomOverlayView)
-    {
-        imagePicker.takePicture()
-    }
+
     func getDocumentsDirectory() -> NSString
     {
         let documentsDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -157,18 +203,21 @@ class ImagesViewController: UIViewController,
         picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
-        counter += 1
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
-        if let compressedData = UIImageJPEGRepresentation(chosenImage, 0.6)
+        if let compressedData = UIImageJPEGRepresentation(chosenImage, 0.1)
         {
-            let filename = getDocumentsDirectory().stringByAppendingPathComponent("\(counter)copy.jpg")
-            print(filename)
-            compressedData.writeToFile(filename, atomically: true)
             let compressedImage = UIImage(data: compressedData)
-            UIImageWriteToSavedPhotosAlbum(compressedImage!, self,nil, nil)
+//            UIImageWriteToSavedPhotosAlbum(compressedImage!, self,nil, nil)
             print("Success")
+            let mainImagePage = UIView(frame: CGRectMake(0, 0, 100, 75))
+            mainImagePage.backgroundColor = UIColor.whiteColor()
+            let mainImageView = UIImageView(image: compressedImage!)
+            mainImageView.frame = CGRectMake(12.8, 9.73, 74.8, 55.6)
+            mainImagePage.addSubview(mainImageView)
+            let mainImgPDF = PDFPage.View(mainImagePage)
+            pages.append(mainImgPDF)
         }
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     //What to do if the image picker cancels.
@@ -181,108 +230,15 @@ class ImagesViewController: UIViewController,
     func generatePDF()
     {
         
-//        let imageString = getDocumentsDirectory()
-//        do
-//        {
-//            var storedImages: [String]
-//            {
-//                try (NSFileManager().contentsOfDirectoryAtPath(imageString as String))
-//            }
-//            for file in storedImages
-//            {
-//                let img = UIImage(contentsOfFile: file)
-//                images.append(img!)
-//            }
-//        }
-        let v1 = UIView(frame: CGRectMake(0, 0, 200, 200))
-        v1.backgroundColor = UIColor.whiteColor()
-        let emgMainImg = UIImage(named: "EMG-Main.png")
-        let emgMainImgView = UIImageView(image: emgMainImg!)
-        emgMainImgView.frame = CGRectMake(25, 25, 150, 150)
-        v1.addSubview(emgMainImgView)
-        let photoSheetForm = UIView(frame: CGRectMake(0, 0, 200, 200))
-        photoSheetForm.backgroundColor = UIColor.whiteColor()
-        let mainImgPage = UIView(frame: CGRectMake(0, 0, 200, 200))
-        mainImgPage.backgroundColor = UIColor.whiteColor()
-        let page1 = PDFPage.View(v1)
-        let page2 = PDFPage.View(photoSheetForm)
-        let page3 = PDFPage.View(mainImgPage)
-        var pages = [PDFPage]()
-        pages.append(page1)
-        pages.append(page2)
-        pages.append(page3)
-        for (i, img) in miniImages.enumerate()
-        {
-            if miniImages.count % 4 == 3 && i == miniImages.count - 3
-            {
-                let page = UIView(frame: CGRectMake(0, 0, 200, 200))
-                page.backgroundColor = UIColor.whiteColor()
-                let img1 = UIImageView(image: img)
-                let img2 = UIImageView(image: miniImages[i+1])
-                let img3 = UIImageView(image: miniImages[i+2])
-                img1.frame = CGRectMake(25, 25, 75, 75)
-                img2.frame = CGRectMake(25, 100, 75, 75)
-                img3.frame = CGRectMake(100, 25, 75, 75)
-                page.addSubview(img1)
-                page.addSubview(img2)
-                page.addSubview(img3)
-                let pagePDF = PDFPage.View(page)
-                pages.append(pagePDF)
-            }
-            else if miniImages.count % 4 == 2 && i == miniImages.count - 2
-            {
-                let page = UIView(frame: CGRectMake(0, 0, 200, 200))
-                page.backgroundColor = UIColor.whiteColor()
-                let img1 = UIImageView(image: img)
-                let img2 = UIImageView(image: miniImages[i+1])
-                img1.frame = CGRectMake(25, 25, 75, 75)
-                img2.frame = CGRectMake(100, 25, 75, 75)
-                page.addSubview(img1)
-                page.addSubview(img2)
-                let pagePDF = PDFPage.View(page)
-                pages.append(pagePDF)
-            }
-            else if miniImages.count % 4 == 1 && i == miniImages.count - 1
-            {
-                let page = UIView(frame: CGRectMake(0, 0, 200, 200))
-                page.backgroundColor = UIColor.whiteColor()
-                let img = UIImageView(image: img)
-                img.frame = CGRectMake(25, 25, 75, 75)
-                page.addSubview(img)
-                let pagePDF = PDFPage.View(page)
-                pages.append(pagePDF)
-            }
-            if (i % 4 == 0 || i == 0)
-            {
-                if i == miniImages.count - 1 {
-                    return
-                }
-                else
-                {
-                    let page = UIView(frame: CGRectMake(0, 0, 200, 200))
-                    page.backgroundColor = UIColor.whiteColor()
-                    let img1 = UIImageView(image: img)
-                    let img2 = UIImageView(image: miniImages[i+1])
-                    let img3 = UIImageView(image: miniImages[i+2])
-                    let img4 = UIImageView(image: miniImages[i+3])
-                    img1.frame = CGRectMake(25, 25, 75, 75)
-                    img2.frame = CGRectMake(25, 100, 75, 75)
-                    img3.frame = CGRectMake(100, 25, 75, 75)
-                    img4.frame = CGRectMake(100, 100, 75, 75)
-                    page.addSubview(img1)
-                    page.addSubview(img2)
-                    page.addSubview(img3)
-                    page.addSubview(img4)
-                    let pagePDF = PDFPage.View(page)
-                    pages.append(pagePDF)
-                }
-            }
-        }
-        let finalPage = UIView(frame: CGRectMake(0, 0, 200, 200))
+        
+        
+        print("it's getting here")
+        print("pages count \(pages.count)")
+        let finalPage = UIView(frame: CGRectMake(0, 0, 100, 75))
         finalPage.backgroundColor = UIColor.whiteColor()
-        let finalImg = UIImageView(frame: CGRectMake(10, 10, 180, 180))
-        finalImg.image = UIImage(named: "finalImg.png")
-        finalPage.addSubview(finalImg)
+//        let finalImg = UIImageView(frame: CGRectMake(10, 10, 180, 180))
+//        finalImg.image = UIImage(named: "finalImg.png")
+//        finalPage.addSubview(finalImg)
         let finalPDFPage = PDFPage.View(finalPage)
         pages.append(finalPDFPage)
         let dst = getDocumentsDirectory().stringByAppendingString("/blah.pdf")
@@ -300,6 +256,7 @@ class ImagesViewController: UIViewController,
     }
     
     func emailPDF() {
+        miniImages.removeAll()
         
         let pdfDestination = getDocumentsDirectory().stringByAppendingString("/blah.pdf")
         
@@ -325,6 +282,12 @@ class ImagesViewController: UIViewController,
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        if (error != nil) {
+            print(error!)
+        }
+        if result == MFMailComposeResultSent {
+            print("Fuck yeah bitches, but wheres my email?")
+        }
     }
     
     /*
