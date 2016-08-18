@@ -67,60 +67,105 @@ class ImagesViewController: UIViewController,
         
         let footerImg = UIImage(named: "footer.png")
         let footerView = UIImageView(image: footerImg!)
-        footerView.frame = CGRectMake(0, 66, 60, 9)
+        footerView.frame = CGRectMake(0, 1980, 1800, 270)
         
-        let v1 = UIView(frame: CGRectMake(0, 0, 100, 75))
+        let v1 = UIView(frame: CGRectMake(0, 0, 3000, 2250))
         v1.backgroundColor = UIColor.whiteColor()
         let emgMainImg = UIImage(named: "EMG-Main.png")
         let emgMainImgView = UIImageView(image: emgMainImg!)
-        emgMainImgView.frame = CGRectMake(2.5, 2.5, 95, 55.5)
+        emgMainImgView.frame = CGRectMake(75, 75, 2850, 1665)
         v1.addSubview(emgMainImgView)
-        let photoSheetForm = UIView(frame: CGRectMake(0, 0, 100, 75))
+        let photoSheetForm = UIView(frame: CGRectMake(0, 0, 3000, 2250))
         photoSheetForm.backgroundColor = UIColor.whiteColor()
         photoSheetForm.addSubview(footerView)
-        let photoSheetTitle = UILabel(frame: CGRectMake(18.43, 18.97, 63.4, 7.2))
+        let topImg = UIImage(named: "topImg.png")
+        let topImgView = UIImageView(image: topImg!)
+        topImgView.frame = CGRectMake(89, 86, 2822, 385)
+        photoSheetForm.addSubview(topImgView)
+        let photoSheetTitle = UILabel(frame: CGRectMake(554, 570, 1900, 217))
         photoSheetTitle.text = "Photo Sheet"
         photoSheetTitle.textAlignment = NSTextAlignment.Center
-        photoSheetTitle.font = UIFont.boldSystemFontOfSize(5)
+        photoSheetTitle.font = UIFont.boldSystemFontOfSize(100)
         
         photoSheetTitle.layer.borderColor = UIColor.blackColor().CGColor
-        photoSheetTitle.layer.borderWidth = 0.05
+        photoSheetTitle.layer.borderWidth = 1
         photoSheetForm.addSubview(photoSheetTitle)
-        let label1 = UILabel(frame: CGRectMake(18.43, 26.17, 20.5, 7.2))
-        label1.text = "Store #:"
+        let label1 = UILabel(frame: CGRectMake(554, 787, 620, 217))
+        let label1Text = "Store #:"
+        label1.text = "\(label1Text)  "
         label1.textAlignment = NSTextAlignment.Right
-//        label1.font = UIFont.boldSystemFontOfSize(4)
+        label1.font = UIFont.boldSystemFontOfSize(75)
         label1.layer.borderColor = UIColor.blackColor().CGColor
-        label1.layer.borderWidth = 0.05
+        label1.layer.borderWidth = 1
         photoSheetForm.addSubview(label1)
-        let label2 = UILabel(frame: CGRectMake(18.43, 33.37, 20.5, 7.2))
-        label2.text = "Store Name:"
+        let storeNumText = UILabel(frame: CGRectMake(1174, 787, 1280, 217))
+        storeNumText.text = "  \(form!["storeNum"]!)"
+        storeNumText.textAlignment = NSTextAlignment.Left
+        storeNumText.font = UIFont.systemFontOfSize(75)
+        storeNumText.layer.borderColor = UIColor.blackColor().CGColor
+        storeNumText.layer.borderWidth = 1
+        photoSheetForm.addSubview(storeNumText)
+        let label2 = UILabel(frame: CGRectMake(554, 1004, 620, 217))
+        let label2Text = "Store Name:"
+        label2.text = "\(label2Text)  "
         label2.textAlignment = NSTextAlignment.Right
-//        label2.font = UIFont.boldSystemFontOfSize(4)
+        label2.font = UIFont.boldSystemFontOfSize(75)
         label2.layer.borderColor = UIColor.blackColor().CGColor
-        label2.layer.borderWidth = 0.05
+        label2.layer.borderWidth = 1
         photoSheetForm.addSubview(label2)
-        let label3 = UILabel(frame: CGRectMake(18.43, 40.57, 20.5, 7.2))
-        label3.text = "Project Name:"
+        let storeNameText = UILabel(frame: CGRectMake(1174, 1004, 1280, 217))
+        storeNameText.text = "  \(form!["storeName"]!)"
+        storeNameText.textAlignment = NSTextAlignment.Left
+        storeNameText.font = UIFont.systemFontOfSize(75)
+        storeNameText.layer.borderColor = UIColor.blackColor().CGColor
+        storeNameText.layer.borderWidth = 1
+        photoSheetForm.addSubview(storeNameText)
+        let label3 = UILabel(frame: CGRectMake(554, 1221, 620, 217))
+        let label3Text = "Project Name:"
+        label3.text = "\(label3Text)  "
         label3.textAlignment = NSTextAlignment.Right
-//        label3.font = UIFont.boldSystemFontOfSize(4)
+        label3.font = UIFont.boldSystemFontOfSize(75)
         label3.layer.borderColor = UIColor.blackColor().CGColor
-        label3.layer.borderWidth = 0.05
+        label3.layer.borderWidth = 1
         photoSheetForm.addSubview(label3)
-        let label4 = UILabel(frame: CGRectMake(18.43, 47.77, 20.5, 7.2))
-        label4.text = "Project Manager:"
+        let projectNameText = UILabel(frame: CGRectMake(1174, 1221, 1280, 217))
+        projectNameText.text = "  \(form!["projectName"]!)"
+        projectNameText.textAlignment = NSTextAlignment.Left
+        projectNameText.font = UIFont.systemFontOfSize(75)
+        projectNameText.layer.borderWidth = 1
+        projectNameText.layer.borderColor = UIColor.blackColor().CGColor
+        photoSheetForm.addSubview(projectNameText)
+        let label4 = UILabel(frame: CGRectMake(554, 1438, 620, 217))
+        let label4Text = "Project Manager:"
+        label4.text = "\(label4Text)  "
         label4.textAlignment = NSTextAlignment.Right
-//        label4.font = UIFont.boldSystemFontOfSize(4)
+        label4.font = UIFont.boldSystemFontOfSize(75)
         label4.layer.borderColor = UIColor.blackColor().CGColor
-        label4.layer.borderWidth = 0.05
+        label4.layer.borderWidth = 1
         photoSheetForm.addSubview(label4)
-        let label5 = UILabel(frame: CGRectMake(18.43, 54.97, 20.5, 7.2))
-        label5.text = "Date:"
+        let projectMngText = UILabel(frame: CGRectMake(1174, 1438, 1280, 217))
+        projectMngText.text = "  \(form!["projectMngName"]!)"
+        projectMngText.textAlignment = NSTextAlignment.Left
+        projectMngText.font = UIFont.systemFontOfSize(75)
+        projectMngText.layer.borderColor = UIColor.blackColor().CGColor
+        projectMngText.layer.borderWidth = 1
+        photoSheetForm.addSubview(projectMngText)
+        let label5 = UILabel(frame: CGRectMake(554, 1655, 620, 217))
+        let label5Text = "Date:"
+        label5.text = "\(label5Text)  "
         label5.textAlignment = NSTextAlignment.Right
-//        label5.font = UIFont.boldSystemFontOfSize(4)
+        label5.font = UIFont.boldSystemFontOfSize(75)
         label5.layer.borderColor = UIColor.blackColor().CGColor
-        label5.layer.borderWidth = 0.05
+        label5.layer.borderWidth = 1
         photoSheetForm.addSubview(label5)
+        let date = UILabel(frame: CGRectMake(1174, 1655, 1280, 217))
+        date.text = "  \(form!["date"]!)"
+        date.textAlignment = NSTextAlignment.Left
+        date.font = UIFont.systemFontOfSize(75)
+        date.layer.borderWidth = 1
+        date.layer.borderColor = UIColor.blackColor().CGColor
+        photoSheetForm.addSubview(date)
+        
         let page1 = PDFPage.View(v1)
         let page2 = PDFPage.View(photoSheetForm)
         pages.append(page1)
@@ -142,7 +187,7 @@ class ImagesViewController: UIViewController,
     {
         let footerImg = UIImage(named: "footer.png")
         let footerView = UIImageView(image: footerImg!)
-        footerView.frame = CGRectMake(0, 66, 60, 9)
+        footerView.frame = CGRectMake(0, 1980, 1800, 270)
         for image in images
         {
             
@@ -155,16 +200,16 @@ class ImagesViewController: UIViewController,
         }
         for (i, img) in miniImages.enumerate()
         {
-            let width: CGFloat = 31.4
-            let height: CGFloat = 23.4
-            let x1: CGFloat = 10.25
-            let x2: CGFloat = 58.3
-            let y1: CGFloat = 13.15
-            let y2: CGFloat = 38.45
+            let width: CGFloat = 942
+            let height: CGFloat = 702
+            let x1: CGFloat = 307.5
+            let x2: CGFloat = 1749
+            let y1: CGFloat = 394.5
+            let y2: CGFloat = 1153.5
             if miniImages.count % 4 == 3 && i == miniImages.count - 4
             {
                 print("wtf mate 3 \(i)")
-                let page = UIView(frame: CGRectMake(0, 0, 100, 75))
+                let page = UIView(frame: CGRectMake(0, 0, 3000, 2250))
                 page.backgroundColor = UIColor.whiteColor()
                 let img1 = UIImageView(image: miniImages[i + 1])
                 let img2 = UIImageView(image: miniImages[i + 2])
@@ -184,7 +229,7 @@ class ImagesViewController: UIViewController,
             else if miniImages.count % 4 == 2 && i == miniImages.count - 3
             {
                 print("wtf mate 2 \(i)")
-                let page = UIView(frame: CGRectMake(0, 0, 100, 75))
+                let page = UIView(frame: CGRectMake(0, 0, 3000, 2250))
                 page.backgroundColor = UIColor.whiteColor()
                 let img1 = UIImageView(image: miniImages[i + 1])
                 let img2 = UIImageView(image: miniImages[i + 2])
@@ -201,7 +246,7 @@ class ImagesViewController: UIViewController,
             else if miniImages.count % 4 == 1 && i == miniImages.count - 2
             {
                 print("wtf mate 1 \(i)")
-                let page = UIView(frame: CGRectMake(0, 0, 100, 75))
+                let page = UIView(frame: CGRectMake(0, 0, 3000, 2250))
                 page.backgroundColor = UIColor.whiteColor()
                 let img = UIImageView(image: miniImages[i + 1])
                 img.frame = CGRectMake(x1, y1, width, height)
@@ -221,7 +266,7 @@ class ImagesViewController: UIViewController,
                 else
                 {
                     print("mini image page \(i)")
-                    let page = UIView(frame: CGRectMake(0, 0, 100, 75))
+                    let page = UIView(frame: CGRectMake(0, 0, 3000, 2250))
                     page.backgroundColor = UIColor.whiteColor()
                     let img1 = UIImageView(image: img)
                     let img2 = UIImageView(image: miniImages[i + 1])
@@ -237,7 +282,7 @@ class ImagesViewController: UIViewController,
                     page.addSubview(img4)
                     let footerImg = UIImage(named: "footer.png")
                     let footerView = UIImageView(image: footerImg!)
-                    footerView.frame = CGRectMake(0, 66, 60, 9)
+                    footerView.frame = CGRectMake(0, 1980, 1800, 270)
                     page.addSubview(footerView)
                     let pagePDF = PDFPage.View(page)
                     pages.append(pagePDF)
@@ -268,14 +313,14 @@ class ImagesViewController: UIViewController,
         {
             let footerImg = UIImage(named: "footer.png")
             let footerView = UIImageView(image: footerImg!)
-            footerView.frame = CGRectMake(0, 66, 60, 9)
+            footerView.frame = CGRectMake(0, 1980, 1800, 270)
             let compressedImage = UIImage(data: compressedData)
             UIImageWriteToSavedPhotosAlbum(compressedImage!, self,nil, nil)
             print("Success")
-            let mainImagePage = UIView(frame: CGRectMake(0, 0, 100, 75))
+            let mainImagePage = UIView(frame: CGRectMake(0, 0, 3000, 2250))
             mainImagePage.backgroundColor = UIColor.whiteColor()
             let mainImageView = UIImageView(image: compressedImage!)
-            mainImageView.frame = CGRectMake(12.8, 9.73, 74.8, 55.6)
+            mainImageView.frame = CGRectMake(384, 291.9, 2244, 1668)
             mainImagePage.addSubview(mainImageView)
             mainImagePage.addSubview(footerView)
             let mainImgPDF = PDFPage.View(mainImagePage)
@@ -298,9 +343,9 @@ class ImagesViewController: UIViewController,
         
         print("it's getting here")
         print("pages count \(pages.count)")
-        let finalPage = UIView(frame: CGRectMake(0, 0, 100, 75))
+        let finalPage = UIView(frame: CGRectMake(0, 0, 3000, 2250))
         finalPage.backgroundColor = UIColor.whiteColor()
-        let finalImg = UIImageView(frame: CGRectMake(2.5, 2.5, 95, 55.5))
+        let finalImg = UIImageView(frame: CGRectMake(75, 75, 2850, 1665))
         finalImg.image = UIImage(named: "endImg.png")
         finalPage.addSubview(finalImg)
         let finalPDFPage = PDFPage.View(finalPage)
@@ -334,10 +379,11 @@ class ImagesViewController: UIViewController,
             //Set the subject and message of the email
             mailComposer.setSubject("Have you heard a fart?")
             mailComposer.setMessageBody("This is what they sound like.", isHTML: false)
+            mailComposer.setToRecipients(["wfuger@gmail.com"])
             if let fileData = NSData(contentsOfFile: pdfDestination)
             {
                 print("File data loaded.")
-                mailComposer.addAttachmentData(fileData, mimeType: "application/pdf", fileName: "blah.pdf")
+                mailComposer.addAttachmentData(fileData, mimeType: "application/pdf", fileName: "Home Depot #\(form!["storeNum"]!) \(form!["storeName"]!)- \(form!["projectName"]!) Photos, \(form!["date"]!).pdf")
             }
             self.presentViewController(mailComposer, animated: true, completion: nil)
         }

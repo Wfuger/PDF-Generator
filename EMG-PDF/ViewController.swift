@@ -15,6 +15,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var projectNamePicker: UIPickerView!
     
+    @IBOutlet weak var projectMngrTextField: UITextField!
+    
     @IBOutlet weak var datePicker: UIDatePicker!
     
     @IBAction func addImagesBtn(sender: AnyObject) {
@@ -25,7 +27,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         let dateStr = dateFormatter.stringFromDate(datePicker.date)
         form["date"] = dateStr
-//        form["projectMngName"] = 
+        form["projectMngName"] = projectMngrTextField.text!
+        form["projectName"] = pickerData[projectNamePicker.selectedRowInComponent(0)]
     }
     var pickerData = [String]()
     
@@ -93,12 +96,17 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         self.storeNameTextField.layer.borderColor = UIColor.blackColor().CGColor
+        self.storeNameTextField.layer.borderWidth = 1
         self.storeNumTextField.layer.borderColor = UIColor.blackColor().CGColor
+        self.storeNumTextField.layer.borderWidth = 1
+        self.projectMngrTextField.layer.borderColor = UIColor.blackColor().CGColor
+        self.projectMngrTextField.layer.borderWidth = 1
         
         self.projectNamePicker.dataSource = self
         self.projectNamePicker.delegate = self
         self.storeNumTextField.delegate = self
         self.storeNameTextField.delegate = self
+        self.projectMngrTextField.delegate = self
         
         
         
@@ -139,7 +147,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         print(pickerData[row])
         
-        form["projectName"] = pickerData[row]
+        
         // This method is triggered whenever the user makes a change to the picker selection.
         // The parameter named row and component represents what was selected.
     }
