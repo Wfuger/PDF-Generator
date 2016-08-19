@@ -73,8 +73,25 @@ class ImagesViewController: UIViewController,
         v1.backgroundColor = UIColor.whiteColor()
         let emgMainImg = UIImage(named: "EMG-Main.png")
         let emgMainImgView = UIImageView(image: emgMainImg!)
-        emgMainImgView.frame = CGRectMake(75, 75, 2850, 1665)
+        emgMainImgView.frame = CGRectMake(75, 60, 2850, 1500)
         v1.addSubview(emgMainImgView)
+        let bottomBanner = UIImage(named: "bottomBanner.png")
+        let bottomBannerImg = UIImageView(image: bottomBanner)
+        bottomBannerImg.frame = CGRectMake(0, 1630, 3000, 500)
+        v1.addSubview(bottomBannerImg)
+        let siteText = UILabel(frame: CGRectMake(0, 1775, 3000, 225))
+        siteText.text = "HD #\(form!["storeNum"]!) \(form!["storeName"]!)"
+        siteText.textAlignment = NSTextAlignment.Center
+        siteText.font = UIFont.systemFontOfSize(140)
+        siteText.textColor = UIColor.darkGrayColor()
+        v1.addSubview(siteText)
+        let fDate = UILabel(frame: CGRectMake(0,1950,3000,125))
+        fDate.text = form!["date"]
+        fDate.textAlignment = NSTextAlignment.Center
+        fDate.font = UIFont.systemFontOfSize(65)
+        fDate.textColor = UIColor.grayColor()
+        v1.addSubview(fDate)
+        
         let photoSheetForm = UIView(frame: CGRectMake(0, 0, 3000, 2250))
         photoSheetForm.backgroundColor = UIColor.whiteColor()
         photoSheetForm.addSubview(footerView)
@@ -86,7 +103,6 @@ class ImagesViewController: UIViewController,
         photoSheetTitle.text = "Photo Sheet"
         photoSheetTitle.textAlignment = NSTextAlignment.Center
         photoSheetTitle.font = UIFont.boldSystemFontOfSize(100)
-        
         photoSheetTitle.layer.borderColor = UIColor.blackColor().CGColor
         photoSheetTitle.layer.borderWidth = 1
         photoSheetForm.addSubview(photoSheetTitle)
@@ -345,9 +361,13 @@ class ImagesViewController: UIViewController,
         print("pages count \(pages.count)")
         let finalPage = UIView(frame: CGRectMake(0, 0, 3000, 2250))
         finalPage.backgroundColor = UIColor.whiteColor()
-        let finalImg = UIImageView(frame: CGRectMake(75, 75, 2850, 1665))
+        let finalImg = UIImageView(frame: CGRectMake(75, 60, 2850, 1500))
         finalImg.image = UIImage(named: "endImg.png")
         finalPage.addSubview(finalImg)
+        let bottomBanner = UIImage(named: "bottomBanner.png")
+        let bottomBannerImg = UIImageView(image: bottomBanner)
+        bottomBannerImg.frame = CGRectMake(0, 1630, 3000, 500)
+        finalPage.addSubview(bottomBannerImg)
         let finalPDFPage = PDFPage.View(finalPage)
         pages.append(finalPDFPage)
         let dst = getDocumentsDirectory().stringByAppendingString("/blah.pdf")
@@ -377,7 +397,7 @@ class ImagesViewController: UIViewController,
             mailComposer.mailComposeDelegate = self
             
             //Set the subject and message of the email
-            mailComposer.setSubject("Have you heard a fart?")
+            mailComposer.setSubject("Home Depot #\(form!["storeNum"]!) \(form!["storeName"]!)- \(form!["projectName"]!) Photos, \(form!["date"]!)")
             mailComposer.setMessageBody("This is what they sound like.", isHTML: false)
             mailComposer.setToRecipients(["wfuger@gmail.com"])
             if let fileData = NSData(contentsOfFile: pdfDestination)
