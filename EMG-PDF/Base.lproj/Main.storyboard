@@ -70,14 +70,13 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="login:" destination="PbO-2D-PTa" eventType="touchUpInside" id="t02-We-tgx"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="toProjectInfo" id="Ksl-YH-vYb"/>
+                                    <action selector="saveButton:" destination="PbO-2D-PTa" eventType="touchUpInside" id="bHY-El-QEr"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pe0-7M-95v">
                                 <rect key="frame" x="185" y="392" width="230" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Manager Contact Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDT-Wt-IIV">
                                 <rect key="frame" x="20" y="28" width="560" height="97"/>
@@ -114,15 +113,15 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailTextField" destination="Lfq-eh-czJ" id="q8p-1t-rS1"/>
-                        <outlet property="passwordTextField" destination="INj-v4-L8c" id="Szh-lG-38z"/>
-                        <segue destination="15v-8Q-w8W" kind="unwind" identifier="unwindToForm" unwindAction="unwindToForm:" id="kjJ-r3-WZf"/>
+                        <outlet property="emailTextField" destination="INj-v4-L8c" id="fsj-nW-xqm"/>
+                        <outlet property="nameTextField" destination="Lfq-eh-czJ" id="zTm-Fv-dev"/>
+                        <outlet property="phoneNumTextField" destination="Pe0-7M-95v" id="ZVP-j2-shu"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="toProjectInfo" id="DVC-vr-F6d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nQw-rX-pki" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="15v-8Q-w8W" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="632" y="-143"/>
+            <point key="canvasLocation" x="1444" y="-30"/>
         </scene>
         <!--Images View Controller-->
         <scene sceneID="wDI-Nh-Ed6">
@@ -185,7 +184,7 @@
                                     <action selector="mainImgFromLibrary:" destination="oP9-5i-btx" eventType="touchUpInside" id="dGm-YK-IRX"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Main Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ol9-gy-0r9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Add Main Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ol9-gy-0r9">
                                 <rect key="frame" x="238" y="77" width="124" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -230,7 +229,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l3h-sr-4er" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="609" y="594"/>
+            <point key="canvasLocation" x="1421" y="594"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="a54-6R-yNw">
@@ -248,7 +247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0hb-7V-P3c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1303" y="594"/>
+            <point key="canvasLocation" x="2115" y="594"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -374,31 +373,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-115" y="219"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="tld-rb-7wZ">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GyD-La-gZi" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="A9u-M4-oaD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="k8P-31-7u8"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QDa-cI-iBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-927" y="219"/>
+            <point key="canvasLocation" x="697" y="219"/>
         </scene>
     </scenes>
     <resources>
         <image name="UploadImage" width="118" height="142"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Ksl-YH-vYb"/>
-    </inferredMetricsTieBreakers>
 </document>

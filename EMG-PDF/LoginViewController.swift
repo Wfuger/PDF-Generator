@@ -8,36 +8,69 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var nameTextField: UITextField!
+    
     @IBOutlet weak var emailTextField: UITextField!
     
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var phoneNumTextField: UITextField!
     
-
-    let emailKey = "batman@ex.com"
-    let passwordKey = "nananana"
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    
+    @IBAction func saveButton(sender: AnyObject) {
+        var mngrInfo = [String: AnyObject]()
+        mngrInfo["name"] = nameTextField.text!
+        mngrInfo["email"] = emailTextField.text!
+        mngrInfo["phoneNum"] = phoneNumTextField.text!
+//        NSUserDefaults.resetStandardUserDefaults()
+//        print(mngrInfo)
+        defaults.setObject(mngrInfo, forKey: "mngrInfo")
+        if let someShit = defaults.objectForKey("mngrInfo") as? [String: String]
+        {
+            print("WHAT IN THE FUCKING FUCK? \(someShit)")
+            performSegueWithIdentifier("toProjectInfo", sender: nil)
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.appDidBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        
+        nameTextField.delegate = self
+        emailTextField.delegate = self
+        phoneNumTextField.delegate = self
+        print(defaults.objectForKey("mngrInfo") as? [String: String])
+//        hasMngrInfo()
+        
     }
-    
-    @IBAction func login(sender: AnyObject) {
-        self.performSegueWithIdentifier("unwindToForm", sender: self)
-        print("wtf")
-//        if (checkLogin(self.emailTextField.text!, password: self.passwordTextField.text!)) {
-//            
-//        }
+    func appDidBecomeActive(notification: NSNotification) {
+        hasMngrInfo()
     }
-    
-
-    func checkLogin(email:String, password:String) -> Bool {
-        if ((email == emailKey) && (password == passwordKey)){
-            return true
+    func hasMngrInfo() {
+        if (defaults.objectForKey("mngrInfo") != nil)
+        {
+            let mngrInfo = defaults.objectForKey("mngrInfo") as? [String: String] ?? [String: String]()
+            print("it's there \(mngrInfo["name"])")
+            performSegueWithIdentifier("toProjectInfo", sender: nil)
         } else {
-            return false
+            print("it's not there")
         }
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+
+    // TODO: set mngr details to nsuserdefaults
+
 
 }
