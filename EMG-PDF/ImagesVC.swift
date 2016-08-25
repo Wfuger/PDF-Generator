@@ -13,7 +13,7 @@ import ImagePicker
 import MessageUI
 
 
-class ImagesViewController: UIViewController,
+class ImagesVC: UIViewController,
                             UIImagePickerControllerDelegate,
                             UINavigationControllerDelegate,
                             ImagePickerDelegate,

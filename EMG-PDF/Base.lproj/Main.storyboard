@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--Contact InfoVC-->
         <scene sceneID="hlG-Hp-XuU">
             <objects>
-                <viewController id="PbO-2D-PTa" customClass="LoginViewController" customModule="EMG_PDF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PbO-2D-PTa" customClass="ContactInfoVC" customModule="EMG_PDF" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AaE-jZ-aoR"/>
                         <viewControllerLayoutGuide type="bottom" id="eeT-JH-qK3"/>
@@ -38,8 +38,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Phone Number (numbers only)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eqd-4X-KGO">
-                                <rect key="frame" x="102" y="346" width="397" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number (numbers only)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eqd-4X-KGO">
+                                <rect key="frame" x="183" y="346" width="234" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="9Fr-pg-D4x"/>
                                 </constraints>
@@ -121,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nQw-rX-pki" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1444" y="-30"/>
+            <point key="canvasLocation" x="697" y="-500"/>
         </scene>
         <!--Images View Controller-->
         <scene sceneID="wDI-Nh-Ed6">
@@ -184,8 +184,8 @@
                                     <action selector="mainImgFromLibrary:" destination="oP9-5i-btx" eventType="touchUpInside" id="dGm-YK-IRX"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Add Main Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ol9-gy-0r9">
-                                <rect key="frame" x="238" y="77" width="124" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Main Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ol9-gy-0r9">
+                                <rect key="frame" x="238" y="33" width="124" height="65"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -223,36 +223,71 @@
                             <constraint firstItem="ol9-gy-0r9" firstAttribute="top" secondItem="iK8-To-utB" secondAttribute="bottom" constant="13" id="vKE-oe-wj6"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <segue destination="StU-WR-t5I" kind="show" identifier="didZip" id="bqC-rc-SxA"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l3h-sr-4er" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1421" y="594"/>
+            <point key="canvasLocation" x="2181" y="219"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="a54-6R-yNw">
+        <!--Item 2-->
+        <scene sceneID="AtZ-SQ-6EY">
             <objects>
-                <viewController id="StU-WR-t5I" sceneMemberID="viewController">
+                <viewController id="ztk-mo-KxF" customClass="NotesVC" customModule="EMG_PDF" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ObP-me-uBP"/>
-                        <viewControllerLayoutGuide type="bottom" id="X4F-cz-RQP"/>
+                        <viewControllerLayoutGuide type="top" id="17T-Ck-1J1"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ix2-bJ-qU7"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="uPh-aC-vvk">
+                    <view key="view" contentMode="scaleToFill" id="si1-R9-D5n">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="0rQ-4G-wEd"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0hb-7V-P3c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0B3-k9-s59" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2115" y="594"/>
+            <point key="canvasLocation" x="1715" y="1355"/>
         </scene>
-        <!--View Controller-->
+        <!--Item 1-->
+        <scene sceneID="NnL-Qu-Z5j">
+            <objects>
+                <viewController id="7iY-J6-rJp" customClass="ImagesVC" customModule="EMG_PDF" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rzr-4e-WDg"/>
+                        <viewControllerLayoutGuide type="bottom" id="RXB-JH-ky4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RgO-Xe-ueV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="8Qc-eF-J9h"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Wx-V6-Rde" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1716" y="695"/>
+        </scene>
+        <!--NotesTBC-->
+        <scene sceneID="DR7-Xl-zhK">
+            <objects>
+                <tabBarController id="jGe-Uj-sHK" customClass="NotesTBC" customModule="EMG_PDF" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="gcD-Ak-qlE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="7iY-J6-rJp" kind="relationship" relationship="viewControllers" id="xRg-jZ-xYX"/>
+                        <segue destination="ztk-mo-KxF" kind="relationship" relationship="viewControllers" id="H3X-lv-xi7"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6fq-rh-nk3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="898" y="1025"/>
+        </scene>
+        <!--Project InfoVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="EMG_PDF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ProjectInfoVC" customModule="EMG_PDF" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
