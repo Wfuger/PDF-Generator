@@ -4,8 +4,6 @@
 target 'EMG-PDF' do
   use_frameworks!
 
-  pod 'Alamofire'
-  pod 'SSZipArchive'
   pod 'PDFGenerator'
   pod 'ImagePicker'
 

@@ -38,7 +38,7 @@ class ContactInfoVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.appDidBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ContactInfoVC.appDidBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
         
         nameTextField.delegate = self
         emailTextField.delegate = self

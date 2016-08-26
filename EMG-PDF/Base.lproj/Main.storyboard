@@ -123,10 +123,10 @@
             </objects>
             <point key="canvasLocation" x="697" y="-500"/>
         </scene>
-        <!--Images View Controller-->
+        <!--ImagesVC-->
         <scene sceneID="wDI-Nh-Ed6">
             <objects>
-                <viewController id="oP9-5i-btx" customClass="ImagesViewController" customModule="EMG_PDF" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oP9-5i-btx" customClass="ImagesVC" customModule="EMG_PDF" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iK8-To-utB"/>
                         <viewControllerLayoutGuide type="bottom" id="cXc-7s-Weu"/>

@@ -7,17 +7,16 @@
 //
 
 import UIKit
-import SSZipArchive
 import PDFGenerator
 import ImagePicker
 import MessageUI
 
 
 class ImagesVC: UIViewController,
-                            UIImagePickerControllerDelegate,
-                            UINavigationControllerDelegate,
-                            ImagePickerDelegate,
-                            MFMailComposeViewControllerDelegate {
+                UIImagePickerControllerDelegate,
+                UINavigationControllerDelegate,
+                ImagePickerDelegate,
+                MFMailComposeViewControllerDelegate {
     
     var imagePicker = UIImagePickerController()
     var imagePickerController = ImagePickerController()

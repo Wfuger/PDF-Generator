@@ -8,7 +8,10 @@
 
 import UIKit
 
-class ProjectInfoVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class ProjectInfoVC: UIViewController,
+                     UIPickerViewDataSource,
+                     UIPickerViewDelegate,
+                     UITextFieldDelegate {
     @IBOutlet weak var storeNumTextField: UITextField!
     
     @IBOutlet weak var storeNameTextField: UITextField!
@@ -155,7 +158,7 @@ class ProjectInfoVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "imagesSegue"
         {
-            let controller = segue.destinationViewController as! ImagesViewController
+            let controller = segue.destinationViewController as! ImagesVC
             controller.form = self.form
         }
     }

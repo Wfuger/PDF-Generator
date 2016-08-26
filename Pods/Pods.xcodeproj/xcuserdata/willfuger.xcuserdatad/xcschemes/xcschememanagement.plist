@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Alamofire.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>ImagePicker-ImagePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,35 +24,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SSZipArchive.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7B1A057D8ABF48899E806A4211E9A30D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7BC15C8DB2C5DEBD2CB4D2638B8B5F12</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>9F0C00D382F5E8DDCDB2C3728E9E677E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>A2330A8237B9F93884A5FC77CE29B114</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F40FF78124A92DC2E3F58A4D246D62FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
