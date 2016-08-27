@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import PDFGenerator
 
 class NotesTBC: UITabBarController {
+    
+    var pages: [PDFPage]?
+    var projectInfo: [String : String]?
+    var notes: [String]?
 
     override func viewDidLoad() {
         super.viewDidLoad()

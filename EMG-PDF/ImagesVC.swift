@@ -21,7 +21,7 @@ class ImagesVC: UIViewController,
     var imagePicker = UIImagePickerController()
     var imagePickerController = ImagePickerController()
     var counter = 0
-    var form: [String : String]?
+    var projectInfo: [String : String]?
     var miniImages = [UIImage]()
     var pages = [PDFPage]()
     
@@ -64,6 +64,10 @@ class ImagesVC: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let projectInfo = projectInfo {
+            print(projectInfo)
+        }
+        
         let footerImg = UIImage(named: "footer.png")
         let footerView = UIImageView(image: footerImg!)
         footerView.frame = CGRectMake(0, 1980, 1800, 270)
@@ -79,13 +83,13 @@ class ImagesVC: UIViewController,
         bottomBannerImg.frame = CGRectMake(0, 1630, 3000, 500)
         v1.addSubview(bottomBannerImg)
         let siteText = UILabel(frame: CGRectMake(0, 1775, 3000, 225))
-        siteText.text = "HD #\(form!["storeNum"]!) \(form!["storeName"]!)"
+        siteText.text = "HD #\(projectInfo!["storeNum"]!) \(projectInfo!["storeName"]!)"
         siteText.textAlignment = NSTextAlignment.Center
         siteText.font = UIFont.systemFontOfSize(140)
         siteText.textColor = UIColor.darkGrayColor()
         v1.addSubview(siteText)
         let fDate = UILabel(frame: CGRectMake(0,1950,3000,125))
-        fDate.text = form!["date"]
+        fDate.text = projectInfo!["date"]
         fDate.textAlignment = NSTextAlignment.Center
         fDate.font = UIFont.systemFontOfSize(65)
         fDate.textColor = UIColor.grayColor()
@@ -114,7 +118,7 @@ class ImagesVC: UIViewController,
         label1.layer.borderWidth = 1
         photoSheetForm.addSubview(label1)
         let storeNumText = UILabel(frame: CGRectMake(1174, 787, 1280, 217))
-        storeNumText.text = "  \(form!["storeNum"]!)"
+        storeNumText.text = "  \(projectInfo!["storeNum"]!)"
         storeNumText.textAlignment = NSTextAlignment.Left
         storeNumText.font = UIFont.systemFontOfSize(75)
         storeNumText.layer.borderColor = UIColor.blackColor().CGColor
@@ -129,7 +133,7 @@ class ImagesVC: UIViewController,
         label2.layer.borderWidth = 1
         photoSheetForm.addSubview(label2)
         let storeNameText = UILabel(frame: CGRectMake(1174, 1004, 1280, 217))
-        storeNameText.text = "  \(form!["storeName"]!)"
+        storeNameText.text = "  \(projectInfo!["storeName"]!)"
         storeNameText.textAlignment = NSTextAlignment.Left
         storeNameText.font = UIFont.systemFontOfSize(75)
         storeNameText.layer.borderColor = UIColor.blackColor().CGColor
@@ -144,7 +148,7 @@ class ImagesVC: UIViewController,
         label3.layer.borderWidth = 1
         photoSheetForm.addSubview(label3)
         let projectNameText = UILabel(frame: CGRectMake(1174, 1221, 1280, 217))
-        projectNameText.text = "  \(form!["projectName"]!)"
+        projectNameText.text = "  \(projectInfo!["projectName"]!)"
         projectNameText.textAlignment = NSTextAlignment.Left
         projectNameText.font = UIFont.systemFontOfSize(75)
         projectNameText.layer.borderWidth = 1
@@ -159,7 +163,7 @@ class ImagesVC: UIViewController,
         label4.layer.borderWidth = 1
         photoSheetForm.addSubview(label4)
         let projectMngText = UILabel(frame: CGRectMake(1174, 1438, 1280, 217))
-        projectMngText.text = "  \(form!["projectMngName"]!)"
+        projectMngText.text = "  \(projectInfo!["projectMngName"]!)"
         projectMngText.textAlignment = NSTextAlignment.Left
         projectMngText.font = UIFont.systemFontOfSize(75)
         projectMngText.layer.borderColor = UIColor.blackColor().CGColor
@@ -174,7 +178,7 @@ class ImagesVC: UIViewController,
         label5.layer.borderWidth = 1
         photoSheetForm.addSubview(label5)
         let date = UILabel(frame: CGRectMake(1174, 1655, 1280, 217))
-        date.text = "  \(form!["date"]!)"
+        date.text = "  \(projectInfo!["date"]!)"
         date.textAlignment = NSTextAlignment.Left
         date.font = UIFont.systemFontOfSize(75)
         date.layer.borderWidth = 1
@@ -185,7 +189,6 @@ class ImagesVC: UIViewController,
         let page2 = PDFPage.View(photoSheetForm)
         pages.append(page1)
         pages.append(page2)
-        print(form!)
         
     }
 
@@ -396,13 +399,13 @@ class ImagesVC: UIViewController,
             mailComposer.mailComposeDelegate = self
             
             //Set the subject and message of the email
-            mailComposer.setSubject("Home Depot #\(form!["storeNum"]!) \(form!["storeName"]!)- \(form!["projectName"]!) Photos, \(form!["date"]!)")
+            mailComposer.setSubject("Home Depot #\(projectInfo!["storeNum"]!) \(projectInfo!["storeName"]!)- \(projectInfo!["projectName"]!) Photos, \(projectInfo!["date"]!)")
             mailComposer.setMessageBody("This is what they sound like.", isHTML: false)
             mailComposer.setToRecipients(["wfuger@gmail.com"])
             if let fileData = NSData(contentsOfFile: pdfDestination)
             {
                 print("File data loaded.")
-                mailComposer.addAttachmentData(fileData, mimeType: "application/pdf", fileName: "Home Depot #\(form!["storeNum"]!) \(form!["storeName"]!)- \(form!["projectName"]!) Photos, \(form!["date"]!).pdf")
+                mailComposer.addAttachmentData(fileData, mimeType: "application/pdf", fileName: "Home Depot #\(projectInfo!["storeNum"]!) \(projectInfo!["storeName"]!)- \(projectInfo!["projectName"]!) Photos, \(projectInfo!["date"]!).pdf")
             }
             self.presentViewController(mailComposer, animated: true, completion: nil)
         }

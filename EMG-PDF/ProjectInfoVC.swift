@@ -24,14 +24,14 @@ class ProjectInfoVC: UIViewController,
     
     @IBAction func addImagesBtn(sender: AnyObject) {
         
-        form["storeNum"] = storeNumTextField.text!
-        form["storeName"] = storeNameTextField.text!
+        projecInfo["storeNum"] = storeNumTextField.text!
+        projecInfo["storeName"] = storeNameTextField.text!
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         let dateStr = dateFormatter.stringFromDate(datePicker.date)
-        form["date"] = dateStr
-        form["projectMngName"] = projectMngrTextField.text!
-        form["projectName"] = pickerData[projectNamePicker.selectedRowInComponent(0)]
+        projecInfo["date"] = dateStr
+        projecInfo["projectMngName"] = projectMngrTextField.text!
+        projecInfo["projectName"] = pickerData[projectNamePicker.selectedRowInComponent(0)]
     }
     var pickerData = [String]()
     
@@ -39,7 +39,7 @@ class ProjectInfoVC: UIViewController,
     
     var didReturnFromBackground = false
     
-    var form = [String:String]()
+    var projecInfo = [String:String]()
      
     override func awakeFromNib() {
         
@@ -156,10 +156,11 @@ class ProjectInfoVC: UIViewController,
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "imagesSegue"
+        if segue.identifier == "ImgNotesSegue"
         {
-            let controller = segue.destinationViewController as! ImagesVC
-            controller.form = self.form
+            let TBC = segue.destinationViewController as! UITabBarController
+            let controller = TBC.viewControllers![0] as! ImagesVC
+            controller.projectInfo = self.projecInfo
         }
     }
 }

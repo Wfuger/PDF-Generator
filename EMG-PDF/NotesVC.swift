@@ -9,6 +9,8 @@
 import UIKit
 
 class NotesVC: UIViewController {
+    
+    var notes:[String]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
