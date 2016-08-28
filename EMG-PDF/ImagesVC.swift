@@ -57,7 +57,6 @@ class ImagesVC: UIViewController,
     @IBAction func zipButton(sender: AnyObject) {
         generatePDF()
         
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -93,6 +92,7 @@ class ImagesVC: UIViewController,
         let footerImg = UIImage(named: "footer.png")
         let footerView = UIImageView(image: footerImg!)
         footerView.frame = CGRectMake(0, 1980, 1800, 270)
+        
         for image in images
         {
             if let compressedData = UIImageJPEGRepresentation(image, 0.001)
@@ -102,6 +102,20 @@ class ImagesVC: UIViewController,
                 print("Image count \(project.images.count)")
             }
         }
+//        let imgCount = project.images.count
+//        switch imgCount % 4 {
+//        case 1:
+//            project.tempImgs.append(project.images.removeLast())
+//        case 2:
+//            project.tempImgs.append(project.images.removeLast())
+//            project.tempImgs.append(project.images.removeLast())
+//        case 3:
+//            project.tempImgs.append(project.images.removeLast())
+//            project.tempImgs.append(project.images.removeLast())
+//            project.tempImgs.append(project.images.removeLast())
+//        default:
+//            break
+//        }
         pageMaker.smallImgPages(project.images)
         project.images.removeAll()
         self.imagePickerController.dismissViewControllerAnimated(true, completion: nil)
@@ -141,6 +155,14 @@ class ImagesVC: UIViewController,
     
     func generatePDF()
     {
+        if let notes = project.notes {
+            
+        }
+        
+//        if project.tempImgs.count != 0
+//        {
+//            pageMaker.smallImgPages(project.tempImgs)
+//        }
         pageMaker.finalPage()
         let dst = getDocumentsDirectory().stringByAppendingString("/blah.pdf")
         do

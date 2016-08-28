@@ -280,6 +280,41 @@ class PDFModel: NSObject {
             }
         }
     }
+    func notesPage(notes: [String], title: String?)
+    {
+        let footerImg = UIImage(named: "footer.png")
+        let footerView = UIImageView(image: footerImg!)
+        footerView.frame = CGRectMake(0, 1980, 1800, 270)
+        
+        let noteHeight:CGFloat = 150
+            
+        let notePage1 = UIView(frame: CGRectMake(0, 0, pageWidth, pageHeight))
+        notePage1.backgroundColor = UIColor.whiteColor()
+            
+        let topImg = UIImage(named: "topImg.png")
+        let topImgView = UIImageView(image: topImg!)
+        topImgView.frame = CGRectMake(89, 86, 2822, 385)
+            
+        notePage1.addSubview(footerView)
+        notePage1.addSubview(topImgView)
+        for note in notes
+        {
+            // TODO Need to add red bullet point for each note
+            // TODO Needs to change Y for each note
+            let noteLabel = UILabel(frame: CGRectMake(100, 500, 2900, noteHeight))
+            noteLabel.text = note
+            noteLabel.font = UIFont.boldSystemFontOfSize(100)
+            noteLabel.textAlignment = NSTextAlignment.Left
+            noteLabel.textColor = UIColor.darkGrayColor()
+            noteLabel.numberOfLines = 0
+            noteLabel.sizeToFit()
+            notePage1.addSubview(noteLabel)
+        }
+            
+        project.pages.insert(PDFPage.View(notePage1), atIndex: 2)
+            
+    }
+    
     
     func finalPage() {
         

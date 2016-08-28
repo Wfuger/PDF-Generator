@@ -14,6 +14,7 @@ class ProjectModel: NSObject {
     var notes: [String]?
     var pages = [PDFPage]()
     var images = [UIImage]()
+    var tempImgs = [UIImage]()
     
     func getEmail() -> String
     {
@@ -25,5 +26,5 @@ class ProjectModel: NSObject {
         }
         
     }
-    
+
 }
