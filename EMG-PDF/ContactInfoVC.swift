@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension String {
+    func insert(string:String,ind:Int) -> String {
+        return  String(self.characters.prefix(ind)) + string + String(self.characters.suffix(self.characters.count-ind))
+    }
+}
+
 class ContactInfoVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var nameTextField: UITextField!
@@ -17,21 +23,22 @@ class ContactInfoVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var phoneNumTextField: UITextField!
     
     let defaults = NSUserDefaults.standardUserDefaults()
+    var mngrInfo = [String: String]()
+    
     
     
     @IBAction func saveButton(sender: AnyObject) {
-        var mngrInfo = [String: AnyObject]()
+        
         mngrInfo["name"] = nameTextField.text!
         mngrInfo["email"] = emailTextField.text!
-        mngrInfo["phoneNum"] = phoneNumTextField.text!
-//        NSUserDefaults.resetStandardUserDefaults()
-//        print(mngrInfo)
+        var num = phoneNumTextField.text!
+        num = num.insert(".", ind: 3)
+        num = num.insert(".", ind: 7)
+        
+        
+        mngrInfo["phoneNum"] = num
         defaults.setObject(mngrInfo, forKey: "mngrInfo")
-        if let someShit = defaults.objectForKey("mngrInfo") as? [String: String]
-        {
-            print("WHAT IN THE FUCKING FUCK? \(someShit)")
-            performSegueWithIdentifier("toProjectInfo", sender: nil)
-        }
+        hasMngrInfo()
         
     }
     
@@ -43,8 +50,6 @@ class ContactInfoVC: UIViewController, UITextFieldDelegate {
         nameTextField.delegate = self
         emailTextField.delegate = self
         phoneNumTextField.delegate = self
-        print(defaults.objectForKey("mngrInfo") as? [String: String])
-//        hasMngrInfo()
         
     }
     func appDidBecomeActive(notification: NSNotification) {
@@ -53,8 +58,6 @@ class ContactInfoVC: UIViewController, UITextFieldDelegate {
     func hasMngrInfo() {
         if (defaults.objectForKey("mngrInfo") != nil)
         {
-            let mngrInfo = defaults.objectForKey("mngrInfo") as? [String: String] ?? [String: String]()
-            print("it's there \(mngrInfo["name"])")
             performSegueWithIdentifier("toProjectInfo", sender: nil)
         } else {
             print("it's not there")
@@ -68,9 +71,6 @@ class ContactInfoVC: UIViewController, UITextFieldDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-
-    // TODO: set mngr details to nsuserdefaults
 
 
 }

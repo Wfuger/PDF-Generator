@@ -8,13 +8,34 @@
 
 import UIKit
 
-class NotesVC: UIViewController {
+class NotesVC: UIViewController,
+               UITextFieldDelegate {
     
-    var notes:[String]?
+    var project = ProjectModel()
 
+    @IBOutlet weak var noteTextField: UITextField!
+    
+    @IBAction func addNoteBtn(sender: AnyObject) {
+        
+        project.notes?.append(noteTextField.text!)
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        let tbc = self.tabBarController as! NotesTBC
+        project = tbc.project
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let tbc = self.tabBarController as! NotesTBC
+        project = tbc.project
+
+        noteTextField.delegate = self
+        noteTextField.layer.borderColor = UIColor.blackColor().CGColor
+        noteTextField.layer.borderWidth = 1
+        
         // Do any additional setup after loading the view.
     }
 
@@ -23,7 +44,13 @@ class NotesVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     /*
     // MARK: - Navigation
 

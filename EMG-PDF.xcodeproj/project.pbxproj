@@ -17,10 +17,8 @@
 		762886201D24BA0C002A8DF1 /* ImagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7628861F1D24BA0C002A8DF1 /* ImagesVC.swift */; };
 		7668499B1D6F52BF0051BC96 /* NotesTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7668499A1D6F52BF0051BC96 /* NotesTBC.swift */; };
 		7668499D1D6F7C540051BC96 /* NotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7668499C1D6F7C540051BC96 /* NotesVC.swift */; };
-		76FAEC221D43E30F0001BC68 /* CustomOverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FAEC201D43E30F0001BC68 /* CustomOverlayController.swift */; };
-		76FAEC231D43E30F0001BC68 /* CustomOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76FAEC211D43E30F0001BC68 /* CustomOverlayController.xib */; };
-		76FAEC251D43E34C0001BC68 /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FAEC241D43E34C0001BC68 /* CustomOverlayView.swift */; };
-		76FAEC291D481CAE0001BC68 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FAEC281D481CAE0001BC68 /* constants.swift */; };
+		76B66B321D725D7A007BCEF1 /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B66B311D725D7A007BCEF1 /* ProjectModel.swift */; };
+		76B66B361D7298F6007BCEF1 /* PDFModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B66B351D7298F6007BCEF1 /* PDFModel.swift */; };
 		D7B00E26E85FD82C90CF2CD1 /* Pods_EMG_PDF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38774012DD6628E812CE6C25 /* Pods_EMG_PDF.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,10 +37,8 @@
 		7628861F1D24BA0C002A8DF1 /* ImagesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesVC.swift; sourceTree = "<group>"; };
 		7668499A1D6F52BF0051BC96 /* NotesTBC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTBC.swift; sourceTree = "<group>"; };
 		7668499C1D6F7C540051BC96 /* NotesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesVC.swift; sourceTree = "<group>"; };
-		76FAEC201D43E30F0001BC68 /* CustomOverlayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayController.swift; sourceTree = "<group>"; };
-		76FAEC211D43E30F0001BC68 /* CustomOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomOverlayController.xib; sourceTree = "<group>"; };
-		76FAEC241D43E34C0001BC68 /* CustomOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayView.swift; sourceTree = "<group>"; };
-		76FAEC281D481CAE0001BC68 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		76B66B311D725D7A007BCEF1 /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
+		76B66B351D7298F6007BCEF1 /* PDFModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFModel.swift; sourceTree = "<group>"; };
 		E5B76E52DE20CB7F1BE0B343 /* Pods-EMG-PDF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMG-PDF.release.xcconfig"; path = "Pods/Target Support Files/Pods-EMG-PDF/Pods-EMG-PDF.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,7 +87,8 @@
 		762886161D244899002A8DF1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				76FAEC281D481CAE0001BC68 /* constants.swift */,
+				76B66B351D7298F6007BCEF1 /* PDFModel.swift */,
+				76B66B311D725D7A007BCEF1 /* ProjectModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -120,9 +117,6 @@
 		762886191D2448BE002A8DF1 /* Supporting_Files */ = {
 			isa = PBXGroup;
 			children = (
-				76FAEC201D43E30F0001BC68 /* CustomOverlayController.swift */,
-				76FAEC211D43E30F0001BC68 /* CustomOverlayController.xib */,
-				76FAEC241D43E34C0001BC68 /* CustomOverlayView.swift */,
 				762886021D22FBA9002A8DF1 /* AppDelegate.swift */,
 				762886091D22FBA9002A8DF1 /* Assets.xcassets */,
 				7628861D1D24B2DC002A8DF1 /* UploadImage.png */,
@@ -221,7 +215,6 @@
 				7628860A1D22FBA9002A8DF1 /* Assets.xcassets in Resources */,
 				7628861E1D24B2DC002A8DF1 /* UploadImage.png in Resources */,
 				762886081D22FBA9002A8DF1 /* Main.storyboard in Resources */,
-				76FAEC231D43E30F0001BC68 /* CustomOverlayController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,13 +275,12 @@
 			files = (
 				7668499B1D6F52BF0051BC96 /* NotesTBC.swift in Sources */,
 				762886151D244893002A8DF1 /* ContactInfoVC.swift in Sources */,
-				76FAEC221D43E30F0001BC68 /* CustomOverlayController.swift in Sources */,
-				76FAEC251D43E34C0001BC68 /* CustomOverlayView.swift in Sources */,
+				76B66B321D725D7A007BCEF1 /* ProjectModel.swift in Sources */,
 				762886051D22FBA9002A8DF1 /* ProjectInfoVC.swift in Sources */,
+				76B66B361D7298F6007BCEF1 /* PDFModel.swift in Sources */,
 				7668499D1D6F7C540051BC96 /* NotesVC.swift in Sources */,
 				762886201D24BA0C002A8DF1 /* ImagesVC.swift in Sources */,
 				762886031D22FBA9002A8DF1 /* AppDelegate.swift in Sources */,
-				76FAEC291D481CAE0001BC68 /* constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

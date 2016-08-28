@@ -11,9 +11,7 @@ import PDFGenerator
 
 class NotesTBC: UITabBarController {
     
-    var pages: [PDFPage]?
-    var projectInfo: [String : String]?
-    var notes: [String]?
+    let project = ProjectModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()

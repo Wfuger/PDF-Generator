@@ -18,8 +18,6 @@ class ProjectInfoVC: UIViewController,
     
     @IBOutlet weak var projectNamePicker: UIPickerView!
     
-    @IBOutlet weak var projectMngrTextField: UITextField!
-    
     @IBOutlet weak var datePicker: UIDatePicker!
     
     @IBAction func addImagesBtn(sender: AnyObject) {
@@ -30,55 +28,15 @@ class ProjectInfoVC: UIViewController,
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         let dateStr = dateFormatter.stringFromDate(datePicker.date)
         projecInfo["date"] = dateStr
-        projecInfo["projectMngName"] = projectMngrTextField.text!
         projecInfo["projectName"] = pickerData[projectNamePicker.selectedRowInComponent(0)]
+        
     }
-    var pickerData = [String]()
-    
-    var isAuthenticated = true
-    
-    var didReturnFromBackground = false
-    
+    let pickerData = ["90% Walk", "Pre-bid Walk", "Pre-Con Walk", "Weekly Visit", "Punch Walk"]
     var projecInfo = [String:String]()
-     
-    override func awakeFromNib() {
-        
-        super.awakeFromNib()
-        
-    }
-    
-    @IBAction func unwindToForm(segue: UIStoryboardSegue) {
-        
-    }
-    
-
-    
-//    func appWillResignActive(notification : NSNotification) {
-//        
-//        view.alpha = 0
-//        isAuthenticated = false
-//        didReturnFromBackground = true
-//    }
-    
-    func appDidBecomeActive(notification : NSNotification) {
-        
-//        if didReturnFromBackground {
-//            self.showLoginView()
-//        }
-    }
-    
-    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(false)
-        
-//        view.alpha = 0
-        
-//        
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appWillResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
-//        
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appDidBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
-//        self.showLoginView()
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,14 +44,6 @@ class ProjectInfoVC: UIViewController,
         super.didReceiveMemoryWarning()
         
     }
-    
-//    func showLoginView() {
-//        
-//        if !isAuthenticated {
-//            
-//            self.performSegueWithIdentifier("loginView", sender: self)
-//        }
-//    }
 
 
     override func viewDidLoad() {
@@ -102,18 +52,10 @@ class ProjectInfoVC: UIViewController,
         self.storeNameTextField.layer.borderWidth = 1
         self.storeNumTextField.layer.borderColor = UIColor.blackColor().CGColor
         self.storeNumTextField.layer.borderWidth = 1
-        self.projectMngrTextField.layer.borderColor = UIColor.blackColor().CGColor
-        self.projectMngrTextField.layer.borderWidth = 1
-        
         self.projectNamePicker.dataSource = self
         self.projectNamePicker.delegate = self
         self.storeNumTextField.delegate = self
         self.storeNameTextField.delegate = self
-        self.projectMngrTextField.delegate = self
-        
-        
-        
-        pickerData = ["90% Walk", "Pre-bid Walk", "Pre-Con Walk", "Weekly Visit", "Punch Walk"]
         
     }
     
@@ -144,15 +86,6 @@ class ProjectInfoVC: UIViewController,
         
         return pickerData[row]
         
-    }
-
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        print(pickerData[row])
-        
-        
-        // This method is triggered whenever the user makes a change to the picker selection.
-        // The parameter named row and component represents what was selected.
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
