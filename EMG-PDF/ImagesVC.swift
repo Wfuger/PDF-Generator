@@ -158,7 +158,7 @@ class ImagesVC: UIViewController,
     
     func emailPDF() {
         project.images.removeAll()
-        project.pages.removeRange(2..<(project.pages.count - 1))
+//        project.pages.removeRange((project.pages.count - 1)..<2)
         
         
         let pdfDestination = getDocumentsDirectory().stringByAppendingString("/blah.pdf")
@@ -172,7 +172,7 @@ class ImagesVC: UIViewController,
             
             //Set the subject and message of the email
             mailComposer.setSubject("Home Depot #\(projectInfo!["storeNum"]!) \(projectInfo!["storeName"]!)- \(projectInfo!["projectName"]!) Photos, \(projectInfo!["date"]!)")
-            mailComposer.setToRecipients([self.email])
+            mailComposer.setToRecipients([project.getEmail()])
             if let fileData = NSData(contentsOfFile: pdfDestination)
             {
                 print("File data loaded.")
