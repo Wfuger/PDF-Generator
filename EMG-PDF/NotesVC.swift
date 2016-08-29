@@ -16,9 +16,13 @@ class NotesVC: UIViewController,
     @IBOutlet weak var noteTextField: UITextField!
     
     @IBAction func addNoteBtn(sender: AnyObject) {
-        
-        project.notes?.append(noteTextField.text!)
-        
+        if project.notes == nil {
+            project.notes = [noteTextField.text!]
+        } else {
+            project.notes?.append(noteTextField.text!)   
+        }
+        print(project.notes)
+        noteTextField.text = ""
     }
     
     override func viewWillAppear(animated: Bool) {

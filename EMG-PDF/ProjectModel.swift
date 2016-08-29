@@ -14,5 +14,17 @@ class ProjectModel: NSObject {
     var notes: [String]?
     var pages = [PDFPage]()
     var images = [UIImage]()
+    var tempImgs = [UIImage]()
     
+    func getEmail() -> String
+    {
+        let managerInfo = NSUserDefaults.standardUserDefaults().objectForKey("mngrInfo") as! [String: String]
+        if let email = managerInfo["email"] {
+            return email
+        } else {
+            return ""
+        }
+        
+    }
+
 }

@@ -57,24 +57,26 @@ class ImagesVC: UIViewController,
     @IBAction func zipButton(sender: AnyObject) {
         generatePDF()
         
-        
     }
     
     override func viewWillAppear(animated: Bool) {
-        print("viewWillAppear")
+
         let tbc = self.tabBarController as! NotesTBC
         project = tbc.project
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let tbc = self.tabBarController as! NotesTBC
-        
         project = tbc.project
         
-        pageMaker.page1(projectInfo!)
-        pageMaker.photoSheetPage(projectInfo!)
+        let page1 = pageMaker.page1(projectInfo!)
+        project.pages.append(page1)
+        
+        let page2 = pageMaker.photoSheetPage(projectInfo!)
+        project.pages.append(page2)
         
         
     }
@@ -93,6 +95,7 @@ class ImagesVC: UIViewController,
         let footerImg = UIImage(named: "footer.png")
         let footerView = UIImageView(image: footerImg!)
         footerView.frame = CGRectMake(0, 1980, 1800, 270)
+        
         for image in images
         {
             if let compressedData = UIImageJPEGRepresentation(image, 0.001)
@@ -102,7 +105,22 @@ class ImagesVC: UIViewController,
                 print("Image count \(project.images.count)")
             }
         }
-        pageMaker.smallImgPages(project.images)
+//        let imgCount = project.images.count
+//        switch imgCount % 4 {
+//        case 1:
+//            project.tempImgs.append(project.images.removeLast())
+//        case 2:
+//            project.tempImgs.append(project.images.removeLast())
+//            project.tempImgs.append(project.images.removeLast())
+//        case 3:
+//            project.tempImgs.append(project.images.removeLast())
+//            project.tempImgs.append(project.images.removeLast())
+//            project.tempImgs.append(project.images.removeLast())
+//        default:
+//            break
+//        }
+        let imgPages = pageMaker.smallImgPages(project.images)
+        project.pages.appendContentsOf(imgPages)
         project.images.removeAll()
         self.imagePickerController.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -126,7 +144,8 @@ class ImagesVC: UIViewController,
         {
             let compressedImage = UIImage(data: compressedData)
             UIImageWriteToSavedPhotosAlbum(compressedImage!, self,nil, nil)
-            pageMaker.mainImgPage(compressedImage!)
+            let mainImgPage = pageMaker.mainImgPage(compressedImage!)
+            project.pages.insert(mainImgPage, atIndex: 2)
             
         }
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -141,15 +160,28 @@ class ImagesVC: UIViewController,
     
     func generatePDF()
     {
-        pageMaker.finalPage()
+        
+        if let notes = project.notes {
+            print(notes)
+            let notesPages = pageMaker.notesPage(notes, title: nil)
+            project.pages.insertContentsOf(notesPages, at: 2)
+        }
+        
+//        if project.tempImgs.count != 0
+//        {
+//            pageMaker.smallImgPages(project.tempImgs)
+//        }
+        let finalPage = pageMaker.finalPage()
+        project.pages.append(finalPage)
         let dst = getDocumentsDirectory().stringByAppendingString("/blah.pdf")
         do
         {
+            
             try PDFGenerator.generate(project.pages, outputPath: dst)
         }
         catch (let error)
         {
-            print("pdf-gen error\(error)")
+            print("pdf-gen error \(error)")
         }
         
         emailPDF()
@@ -158,7 +190,7 @@ class ImagesVC: UIViewController,
     
     func emailPDF() {
         project.images.removeAll()
-        project.pages.removeRange(2..<(project.pages.count - 1))
+//        project.pages.removeRange((project.pages.count - 1)..<2)
         
         
         let pdfDestination = getDocumentsDirectory().stringByAppendingString("/blah.pdf")
@@ -172,7 +204,7 @@ class ImagesVC: UIViewController,
             
             //Set the subject and message of the email
             mailComposer.setSubject("Home Depot #\(projectInfo!["storeNum"]!) \(projectInfo!["storeName"]!)- \(projectInfo!["projectName"]!) Photos, \(projectInfo!["date"]!)")
-            mailComposer.setToRecipients([self.email])
+            mailComposer.setToRecipients([project.getEmail()])
             if let fileData = NSData(contentsOfFile: pdfDestination)
             {
                 print("File data loaded.")

@@ -16,7 +16,7 @@ class PDFModel: NSObject {
     let contactInfo = NSUserDefaults.standardUserDefaults().objectForKey("mngrInfo") as! [String: String]
     let project = ProjectModel()
 
-    func page1(storeInfo: [String: String])
+    func page1(storeInfo: [String: String]) -> PDFPage
     {
         
         // Create page view
@@ -51,10 +51,10 @@ class PDFModel: NSObject {
         fDate.textColor = UIColor.grayColor()
         v1.addSubview(fDate)
         
-        project.pages.append(PDFPage.View(v1))
+        return PDFPage.View(v1)
         
     }
-    func photoSheetPage(storeInfo: [String: String])
+    func photoSheetPage(storeInfo: [String: String]) -> PDFPage
     {
         let footerImg = UIImage(named: "footer.png")
         let footerView = UIImageView(image: footerImg!)
@@ -165,10 +165,11 @@ class PDFModel: NSObject {
         date.layer.borderColor = UIColor.blackColor().CGColor
         photoSheetForm.addSubview(date)
         
-        project.pages.append(PDFPage.View(photoSheetForm))
+        return PDFPage.View(photoSheetForm)
     }
 
-    func mainImgPage(img: UIImage) {
+    func mainImgPage(img: UIImage) -> PDFPage
+    {
         let footerImg = UIImage(named: "footer.png")
         let footerView = UIImageView(image: footerImg!)
         footerView.frame = CGRectMake(0, 1980, 1800, 270)
@@ -178,12 +179,12 @@ class PDFModel: NSObject {
         mainImageView.frame = CGRectMake(384, 291.9, 2244, 1668)
         mainImagePage.addSubview(mainImageView)
         mainImagePage.addSubview(footerView)
-        let mainImgPDF = PDFPage.View(mainImagePage)
-        project.pages.append(mainImgPDF)
+        return PDFPage.View(mainImagePage)
     }
     
-    func smallImgPages(images: [UIImage])
+    func smallImgPages(images: [UIImage]) -> [PDFPage]
     {
+        var pagesToReturn = [PDFPage]()
         let footerImg = UIImage(named: "footer.png")
         let footerView = UIImageView(image: footerImg!)
         footerView.frame = CGRectMake(0, 1980, 1800, 270)
@@ -198,7 +199,7 @@ class PDFModel: NSObject {
             if images.count % 4 == 3 && i == images.count - 4
             {
                 
-                let page = UIView(frame: CGRectMake(0, 0, 3000, 2250))
+                let page = UIView(frame: CGRectMake(0, 0, pageWidth, pageHeight))
                 page.backgroundColor = UIColor.whiteColor()
                 let img1 = UIImageView(image: images[i + 1])
                 let img2 = UIImageView(image: images[i + 2])
@@ -211,14 +212,14 @@ class PDFModel: NSObject {
                 page.addSubview(img3)
                 page.addSubview(footerView)
                 let pagePDF = PDFPage.View(page)
-                project.pages.append(pagePDF)
+                pagesToReturn.append(pagePDF)
                 print("pages count \(project.pages.count)")
                 
             }
             else if images.count % 4 == 2 && i == images.count - 3
             {
                 
-                let page = UIView(frame: CGRectMake(0, 0, 3000, 2250))
+                let page = UIView(frame: CGRectMake(0, 0, pageWidth, pageHeight))
                 page.backgroundColor = UIColor.whiteColor()
                 let img1 = UIImageView(image: images[i + 1])
                 let img2 = UIImageView(image: images[i + 2])
@@ -228,34 +229,34 @@ class PDFModel: NSObject {
                 page.addSubview(img2)
                 page.addSubview(footerView)
                 let pagePDF = PDFPage.View(page)
-                project.pages.append(pagePDF)
+                pagesToReturn.append(pagePDF)
                 print("pages count \(project.pages.count)")
                 
             }
             else if images.count % 4 == 1 && i == images.count - 2
             {
                 
-                let page = UIView(frame: CGRectMake(0, 0, 3000, 2250))
+                let page = UIView(frame: CGRectMake(0, 0, pageWidth, pageHeight))
                 page.backgroundColor = UIColor.whiteColor()
                 let img = UIImageView(image: images[i + 1])
                 img.frame = CGRectMake(x1, y1, width, height)
                 page.addSubview(img)
                 page.addSubview(footerView)
                 let pagePDF = PDFPage.View(page)
-                project.pages.append(pagePDF)
+                pagesToReturn.append(pagePDF)
                 print("pages count \(project.pages.count)")
                 
             }
             else if i % 4 == 0 || i == 0
             {
-                if (images.count - i) <= 4
+                if (images.count - i) < 4
                 {
                     break
                 }
                 else
                 {
                     
-                    let page = UIView(frame: CGRectMake(0, 0, 3000, 2250))
+                    let page = UIView(frame: CGRectMake(0, 0, pageWidth, pageHeight))
                     page.backgroundColor = UIColor.whiteColor()
                     let img1 = UIImageView(image: img)
                     let img2 = UIImageView(image: images[i + 1])
@@ -274,14 +275,18 @@ class PDFModel: NSObject {
                     footerView.frame = CGRectMake(0, 1980, 1800, 270)
                     page.addSubview(footerView)
                     let pagePDF = PDFPage.View(page)
-                    project.pages.append(pagePDF)
-                    print("pages count \(project.pages.count)")
+                    pagesToReturn.append(pagePDF)
+                    
                 }
             }
         }
+        return pagesToReturn
     }
+        
     
-    func finalPage() {
+    func finalPage() -> PDFPage
+    {
+        print("in final page function")
         
         let lastPage = UIView(frame: CGRectMake(0, 0, pageWidth, pageHeight))
         lastPage.backgroundColor = UIColor.whiteColor()
@@ -321,9 +326,71 @@ class PDFModel: NSObject {
         contactEmail.textAlignment = NSTextAlignment.Left
         lastPage.addSubview(contactEmail)
         
-        project.pages.append(PDFPage.View(lastPage))
+        return PDFPage.View(lastPage)
         
     }
     
+    func notesPage(notes: [String], title: String?) -> [PDFPage]
+    {
+        var notesPagesToReturn = [PDFPage]()
+        let footerImg = UIImage(named: "footer.png")
+        let footerView = UIImageView(image: footerImg!)
+        footerView.frame = CGRectMake(0, 1980, 1800, 270)
+        
+        let noteHeight:CGFloat = 150
+        var noteYAxis:CGFloat = 600
+        let notePage1 = UIView(frame: CGRectMake(0, 0, pageWidth, pageHeight))
+        notePage1.backgroundColor = UIColor.whiteColor()
+        
+        let topImg = UIImage(named: "topImg.png")
+        let topImgView = UIImageView(image: topImg!)
+        topImgView.frame = CGRectMake(89, 86, 2822, 385)
+        
+        notePage1.addSubview(footerView)
+        notePage1.addSubview(topImgView)
+        for note in notes
+        {
+            // TODO Need to add red bullet point for each note
+            // TODO Needs to change Y for each note
+            
+            let bulletPointLabel = UILabel(frame: CGRectMake(150, noteYAxis - 15, 50, noteHeight))
+            bulletPointLabel.text = "\u{2022}"
+            bulletPointLabel.textColor = UIColor.redColor()
+            bulletPointLabel.font = UIFont.systemFontOfSize(100)
+            notePage1.addSubview(bulletPointLabel)
+            let noteLabel = UILabel(frame: CGRectMake(210, noteYAxis, 2711, noteHeight))
+            noteLabel.text = note
+            noteLabel.font = UIFont.systemFontOfSize(100)
+            noteLabel.textAlignment = NSTextAlignment.Left
+            noteLabel.textColor = UIColor.darkGrayColor()
+            noteLabel.numberOfLines = 0
+            noteLabel.sizeToFit()
+            notePage1.addSubview(noteLabel)
+            let labelHeight = noteLabel.frame.height
+            noteYAxis += labelHeight + 23
+            
+        }
+        notesPagesToReturn.append(PDFPage.View(notePage1))
+        return notesPagesToReturn
+        
+    }
+    
+//    func summaryPage(summary: String) -> PDFPage
+//    {
+//        let summaryView = UIView(frame: CGRectMake(0, 0, pageWidth, pageHeight))
+//        summaryView.backgroundColor = UIColor.whiteColor()
+//        
+//        let topImg = UIImage(named: "topImg.png")
+//        let topImgView = UIImageView(image: topImg!)
+//        topImgView.frame = CGRectMake(89, 86, 2822, 385)
+//        summaryView.addSubview(topImgView)
+//        
+//        let footerImg = UIImage(named: "footer.png")
+//        let footerView = UIImageView(image: footerImg!)
+//        footerView.frame = CGRectMake(0, 1980, 1800, 270)
+//        summaryView.addSubview(footerView)
+//        
+//        let summaryLabel = UILabel(frame: CGRectMake())
+//    }
     
 }
