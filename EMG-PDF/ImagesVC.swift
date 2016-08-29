@@ -92,6 +92,11 @@ class ImagesVC: UIViewController,
     
     func doneButtonDidPress(images: [UIImage])
     {
+        if project.tempImgs.count != 0
+        {
+            project.images.appendContentsOf(project.tempImgs)
+            project.tempImgs.removeAll()
+        }
         let footerImg = UIImage(named: "footer.png")
         let footerView = UIImageView(image: footerImg!)
         footerView.frame = CGRectMake(0, 1980, 1800, 270)
@@ -105,23 +110,27 @@ class ImagesVC: UIViewController,
                 print("Image count \(project.images.count)")
             }
         }
-//        let imgCount = project.images.count
-//        switch imgCount % 4 {
-//        case 1:
-//            project.tempImgs.append(project.images.removeLast())
-//        case 2:
-//            project.tempImgs.append(project.images.removeLast())
-//            project.tempImgs.append(project.images.removeLast())
-//        case 3:
-//            project.tempImgs.append(project.images.removeLast())
-//            project.tempImgs.append(project.images.removeLast())
-//            project.tempImgs.append(project.images.removeLast())
-//        default:
-//            break
-//        }
-        let imgPages = pageMaker.smallImgPages(project.images)
-        project.pages.appendContentsOf(imgPages)
-        project.images.removeAll()
+
+        let imgCount = project.images.count
+        switch imgCount % 4 {
+        case 1:
+            project.tempImgs.append(project.images.removeLast())
+        case 2:
+            project.tempImgs.append(project.images.removeLast())
+            project.tempImgs.append(project.images.removeLast())
+        case 3:
+            project.tempImgs.append(project.images.removeLast())
+            project.tempImgs.append(project.images.removeLast())
+            project.tempImgs.append(project.images.removeLast())
+        default:
+            break
+        }
+        if project.images.count != 0
+        {
+            let imgPages = pageMaker.smallImgPages(project.images)
+            project.pages.appendContentsOf(imgPages)
+        }
+            project.images.removeAll()
         self.imagePickerController.dismissViewControllerAnimated(true, completion: nil)
     }
     func cancelButtonDidPress()
@@ -139,6 +148,7 @@ class ImagesVC: UIViewController,
         picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
+        
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
         if let compressedData = UIImageJPEGRepresentation(chosenImage, 0.001)
         {
@@ -167,10 +177,13 @@ class ImagesVC: UIViewController,
             project.pages.insertContentsOf(notesPages, at: 2)
         }
         
-//        if project.tempImgs.count != 0
-//        {
-//            pageMaker.smallImgPages(project.tempImgs)
-//        }
+        if project.tempImgs.count != 0
+        {
+            print("odd imgs")
+            let oddPage = pageMaker.oddLastSmallImgPage(project.tempImgs)
+            project.pages.append(oddPage)
+            project.tempImgs.removeAll()
+        }
         let finalPage = pageMaker.finalPage()
         project.pages.append(finalPage)
         let dst = getDocumentsDirectory().stringByAppendingString("/blah.pdf")
