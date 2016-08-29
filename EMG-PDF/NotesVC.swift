@@ -15,6 +15,20 @@ class NotesVC: UIViewController,
 
     @IBOutlet weak var noteTextField: UITextField!
     
+    @IBOutlet weak var noteTitleLabel: UITextField!
+    
+    @IBOutlet weak var noteTitleTextField: UITextField!
+    
+    @IBOutlet weak var titleBtn: UIButton!
+    
+    @IBAction func titleBtnDidPress(sender: AnyObject) {
+        
+        project.notesTitle = noteTitleTextField.text!
+        titleBtn.hidden = true
+        noteTitleTextField.hidden = true
+        print("title from notes vc \(project.notesTitle)")
+        
+    }
     @IBAction func addNoteBtn(sender: AnyObject) {
         if project.notes == nil {
             project.notes = [noteTextField.text!]
@@ -40,6 +54,10 @@ class NotesVC: UIViewController,
         noteTextField.layer.borderColor = UIColor.blackColor().CGColor
         noteTextField.layer.borderWidth = 1
         
+        noteTitleTextField.delegate = self
+        noteTitleTextField.layer.borderColor = UIColor.blackColor().CGColor
+        noteTitleTextField.layer.borderWidth = 1
+        
         // Do any additional setup after loading the view.
     }
 
@@ -49,6 +67,14 @@ class NotesVC: UIViewController,
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == noteTitleTextField
+        {
+            addNoteBtn(self)
+        }
+        else
+        {
+            titleBtnDidPress(self)
+        }
         textField.resignFirstResponder()
         return true
     }

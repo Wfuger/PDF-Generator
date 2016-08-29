@@ -244,7 +244,6 @@ class PDFModel: NSObject {
     {
         print("img func w count of \(images.count)")
         var pagesToReturn = [PDFPage]()
-        let footerView = getFooter()
         let width: CGFloat = 942
         let height: CGFloat = 702
         let x1: CGFloat = 307.5
@@ -258,9 +257,9 @@ class PDFModel: NSObject {
             {
                 break
             }
-            else
+            else if i % 4 == 0 || i == 0
             {
-            
+                let footerView = getFooter()
                 let page = UIView(frame: CGRectMake(0, 0, pageWidth, pageHeight))
                 page.backgroundColor = UIColor.whiteColor()
                 let img1 = UIImageView(image: img)
@@ -275,6 +274,7 @@ class PDFModel: NSObject {
                 page.addSubview(img2)
                 page.addSubview(img3)
                 page.addSubview(img4)
+                print(footerView)
                 page.addSubview(footerView)
                 let pagePDF = PDFPage.View(page)
                 pagesToReturn.append(pagePDF)
@@ -331,10 +331,10 @@ class PDFModel: NSObject {
         
     }
     
-    func notesPage(notes: [String], title: String?) -> [PDFPage]
+    func notesPage(notes: [String], notesTitle: String?) -> [PDFPage]
     {
         var notesPagesToReturn = [PDFPage]()
-        
+        print("title from model \(notesTitle)")
         let footerView = getFooter()
 
         let noteHeight:CGFloat = 150
@@ -348,6 +348,16 @@ class PDFModel: NSObject {
         
         notePage1.addSubview(footerView)
         notePage1.addSubview(topImgView)
+        if let titleText = notesTitle
+        {
+            
+            let titleLabel = UILabel(frame: CGRectMake(89, 86, 2822, 385))
+            titleLabel.text = titleText
+            titleLabel.textColor = UIColor.whiteColor()
+            titleLabel.font = UIFont.boldSystemFontOfSize(150)
+            titleLabel.textAlignment = NSTextAlignment.Center
+            notePage1.addSubview(titleLabel)
+        }
         for note in notes
         {
             

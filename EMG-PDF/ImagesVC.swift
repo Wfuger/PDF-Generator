@@ -27,6 +27,10 @@ class ImagesVC: UIViewController,
     var projectInfo: [String: String]?
     var email = String()
     
+    @IBOutlet weak var fromLibraryBtn: UIButton!
+    @IBOutlet weak var fromCameraBtn: UIButton!
+    
+    @IBOutlet weak var mainImgLabel: UILabel!
     
     @IBAction func mainImgFromLibrary(sender: AnyObject) {
         imagePicker = UIImagePickerController()
@@ -92,6 +96,7 @@ class ImagesVC: UIViewController,
     
     func doneButtonDidPress(images: [UIImage])
     {
+        self.imagePickerController.dismissViewControllerAnimated(true, completion: nil)
         if project.tempImgs.count != 0
         {
             project.images.appendContentsOf(project.tempImgs)
@@ -103,7 +108,7 @@ class ImagesVC: UIViewController,
         
         for image in images
         {
-            if let compressedData = UIImageJPEGRepresentation(image, 0.001)
+            if let compressedData = UIImageJPEGRepresentation(image, 0.0001)
             {
                 let compressedImage = UIImage(data: compressedData)
                 project.images.append(compressedImage!)
@@ -127,11 +132,11 @@ class ImagesVC: UIViewController,
         }
         if project.images.count != 0
         {
-            let imgPages = pageMaker.smallImgPages(project.images)
-            project.pages.appendContentsOf(imgPages)
+            let imgPage = pageMaker.smallImgPages(project.images)
+            project.pages.appendContentsOf(imgPage)
         }
             project.images.removeAll()
-        self.imagePickerController.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     func cancelButtonDidPress()
     {
@@ -150,12 +155,15 @@ class ImagesVC: UIViewController,
     {
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
-        if let compressedData = UIImageJPEGRepresentation(chosenImage, 0.001)
+        if let compressedData = UIImageJPEGRepresentation(chosenImage, 0.0001)
         {
             let compressedImage = UIImage(data: compressedData)
             UIImageWriteToSavedPhotosAlbum(compressedImage!, self,nil, nil)
             let mainImgPage = pageMaker.mainImgPage(compressedImage!)
             project.pages.insert(mainImgPage, atIndex: 2)
+            fromCameraBtn.hidden = true
+            fromLibraryBtn.hidden = true
+            mainImgLabel.hidden = true
             
         }
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -170,11 +178,24 @@ class ImagesVC: UIViewController,
     
     func generatePDF()
     {
+
         
-        if let notes = project.notes {
-            print(notes)
-            let notesPages = pageMaker.notesPage(notes, title: nil)
-            project.pages.insertContentsOf(notesPages, at: 2)
+        if let notes = project.notes
+        {
+            print("title from images vc \(project.notesTitle)")
+            let notesPage = pageMaker.notesPage(notes, notesTitle: project.notesTitle)
+            project.pages.insertContentsOf(notesPage, at: 2)
+//            if let notesTitle = project.notesTitle
+//            {
+//                let notesPages = pageMaker.notesPage(notes, notesTitle: notesTitle)
+//                project.pages.insertContentsOf(notesPages, at: 2)
+//            }
+//            else
+//            {
+//                print(notes)
+//                let notesPages = pageMaker.notesPage(notes, notesTitle: nil)
+//                project.pages.insertContentsOf(notesPages, at: 2)
+//            }
         }
         
         if project.tempImgs.count != 0
@@ -203,8 +224,7 @@ class ImagesVC: UIViewController,
     
     func emailPDF() {
         project.images.removeAll()
-//        project.pages.removeRange((project.pages.count - 1)..<2)
-        
+        project.pages = [project.pages[0], project.pages[1]]
         
         let pdfDestination = getDocumentsDirectory().stringByAppendingString("/blah.pdf")
         

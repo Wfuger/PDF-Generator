@@ -12,6 +12,7 @@ import PDFGenerator
 class ProjectModel: NSObject {
 
     var notes: [String]?
+    var notesTitle: String?
     var pages = [PDFPage]()
     var images = [UIImage]()
     var tempImgs = [UIImage]()
