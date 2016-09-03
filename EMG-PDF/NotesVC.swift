@@ -9,7 +9,8 @@
 import UIKit
 
 class NotesVC: UIViewController,
-               UITextFieldDelegate {
+               UITextFieldDelegate,
+               UITableViewDelegate {
     
     var project = ProjectModel()
 
@@ -20,6 +21,10 @@ class NotesVC: UIViewController,
     @IBOutlet weak var noteTitleTextField: UITextField!
     
     @IBOutlet weak var titleBtn: UIButton!
+    
+    @IBOutlet weak var notesTableView: UITableView!
+    
+    
     
     @IBAction func titleBtnDidPress(sender: AnyObject) {
         
@@ -35,8 +40,11 @@ class NotesVC: UIViewController,
         } else {
             project.notes?.append(noteTextField.text!)   
         }
-        print(project.notes)
+        print(project.notes!)
         noteTextField.text = ""
+        notesTableView.estimatedRowHeight = 50.0
+        notesTableView.rowHeight = UITableViewAutomaticDimension
+        notesTableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -54,11 +62,22 @@ class NotesVC: UIViewController,
         noteTextField.layer.borderColor = UIColor.blackColor().CGColor
         noteTextField.layer.borderWidth = 1
         
+        notesTableView.delegate = self
+//        notesTableView.dataSource = self
+        
         noteTitleTextField.delegate = self
         noteTitleTextField.layer.borderColor = UIColor.blackColor().CGColor
         noteTitleTextField.layer.borderWidth = 1
         
+        
+        notesTableView.estimatedRowHeight = 50.0
+        notesTableView.rowHeight = UITableViewAutomaticDimension
+        notesTableView.reloadData()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        notesTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,20 +85,71 @@ class NotesVC: UIViewController,
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField == noteTitleTextField
+        if textField.text == noteTitleTextField.text
         {
-            addNoteBtn(self)
+            titleBtnDidPress(self)
         }
         else
         {
-            titleBtnDidPress(self)
+            addNoteBtn(self)
         }
         textField.resignFirstResponder()
         return true
     }
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
         self.view.endEditing(true)
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let notesCount = project.notes?.count
+        {
+            return notesCount
+        }
+        else
+        {
+            return 0
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "note")
+        
+        
+        cell.textLabel?.text = "\u{2022} \(project.notes![indexPath.row])"
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.sizeToFit()
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete
+        {
+            project.notes?.removeAtIndex(indexPath.row)
+            
+            notesTableView.reloadData()
+               
+        }
+        
     }
     /*
     // MARK: - Navigation

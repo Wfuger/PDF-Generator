@@ -30,6 +30,7 @@ class ImagesVC: UIViewController,
     @IBOutlet weak var fromLibraryBtn: UIButton!
     @IBOutlet weak var fromCameraBtn: UIButton!
     
+    @IBOutlet weak var imgCounterLabel: UILabel!
     @IBOutlet weak var mainImgLabel: UILabel!
     
     @IBAction func mainImgFromLibrary(sender: AnyObject) {
@@ -72,6 +73,7 @@ class ImagesVC: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         let tbc = self.tabBarController as! NotesTBC
         project = tbc.project
@@ -105,14 +107,26 @@ class ImagesVC: UIViewController,
         let footerImg = UIImage(named: "footer.png")
         let footerView = UIImageView(image: footerImg!)
         footerView.frame = CGRectMake(0, 1980, 1800, 270)
-        
+        counter += images.count
+        imgCounterLabel.text = "\(counter)"
+        imgCounterLabel.font = UIFont.boldSystemFontOfSize(20)
+        if counter < 100 {
+            imgCounterLabel.textColor = UIColor.redColor()
+        } else if counter < 125 {
+            imgCounterLabel.textColor = UIColor.yellowColor()
+        } else {
+            imgCounterLabel.textColor = UIColor.greenColor()
+        }
+        print(counter)
         for image in images
         {
             if let compressedData = UIImageJPEGRepresentation(image, 0.0001)
             {
+                
                 let compressedImage = UIImage(data: compressedData)
                 project.images.append(compressedImage!)
                 print("Image count \(project.images.count)")
+                
             }
         }
 
@@ -185,17 +199,6 @@ class ImagesVC: UIViewController,
             print("title from images vc \(project.notesTitle)")
             let notesPage = pageMaker.notesPage(notes, notesTitle: project.notesTitle)
             project.pages.insertContentsOf(notesPage, at: 2)
-//            if let notesTitle = project.notesTitle
-//            {
-//                let notesPages = pageMaker.notesPage(notes, notesTitle: notesTitle)
-//                project.pages.insertContentsOf(notesPages, at: 2)
-//            }
-//            else
-//            {
-//                print(notes)
-//                let notesPages = pageMaker.notesPage(notes, notesTitle: nil)
-//                project.pages.insertContentsOf(notesPages, at: 2)
-//            }
         }
         
         if project.tempImgs.count != 0
